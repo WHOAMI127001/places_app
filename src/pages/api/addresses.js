@@ -11,7 +11,6 @@ const handler = createRoute(async (req, res) => {
     return
   }
 
-  // POST /addresses -> create resource
   if (req.method === "POST") {
     const { street, city, name, country, type } = req.body
     const newAddress = new AddressModel({
