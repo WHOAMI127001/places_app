@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
 
 const placeTypes = {
   restaurant: 'Restaurant',
@@ -8,8 +8,6 @@ const placeTypes = {
   bar: 'Bar',
   parc: 'Parc',
 };
-
-
 const initialValues = {
   name: '',
   address: '',
@@ -27,8 +25,6 @@ const initialValues = {
   parkType: '',
   publicOrPrivate: '',
 };
-
-
 const validationSchema = Yup.object({
   name: Yup.string().required('Name Required'),
   address: Yup.string().required('Address Required'),
@@ -47,7 +43,6 @@ const add_address_places = () => {
     console.log(values);
   };
 
-  
   const renderDynamicFields = (type) => {
     switch (type) {
       case 'restaurant':
@@ -173,7 +168,7 @@ const add_address_places = () => {
   ))}
 </div>
 
-          <Formik
+      <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -194,9 +189,7 @@ const add_address_places = () => {
 
                 <Field type="text" name="country" placeholder="Country" className="p-2 rounded border" />
                 <ErrorMessage name="country" component="div" className="text-red-500" />
-
-
-                {activeType && renderDynamicFields(activeType)}
+     {activeType && renderDynamicFields(activeType)}
                 
                 <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">
                   Add {activeType ? placeTypes[activeType] : 'Place'}
@@ -209,5 +202,4 @@ const add_address_places = () => {
     </div>
   );
 };
-
 export default add_address_places;

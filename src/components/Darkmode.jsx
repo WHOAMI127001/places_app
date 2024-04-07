@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
+const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
 
     if (isDarkMode) {
@@ -30,5 +30,4 @@ const DarkModeButton = () => {
     </button>
   );
 };
-
 export default DarkModeButton;
