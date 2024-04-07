@@ -59,7 +59,26 @@ const Edit = ({address}) => {
       case 'musee':
         return (
           <>
-            {/* Champs spécifiques aux musées */}
+             <Field as="select" name="artisticMovement" className="mt-1 block w-full">
+              <option value="">Select Artistic Movement</option>
+            </Field>
+            <ErrorMessage name="artisticMovement" component="div" className="text-red-500" />
+            <Field as="select" name="typeOfArt" className="mt-1 block w-full">
+              <option value="">Select Type of Art</option>
+              <option value="peinture">Painting</option>
+              <option value="sculpture">Sculpture</option>
+              <option value="photographie">Photography</option>
+              <option value="dessin">Drawing</option>
+              <option value="autre">Other</option>
+            </Field>
+            <ErrorMessage name="typeOfArt" component="div" className="text-red-500" />
+            <Field as="select" name="freeOrPaid" className="mt-1 block w-full">
+              <option value="">Select Free or Paid</option>
+              <option value="gratuit">Free</option>
+              <option value="payant">Paid</option>
+            </Field>
+            <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" /> 
+
           </>
         );
       case 'bar':

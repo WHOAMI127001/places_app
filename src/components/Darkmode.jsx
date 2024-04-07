@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-const Darkmode = () => {
-
+const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -11,15 +9,26 @@ const Darkmode = () => {
     if (isDarkMode) {
       document.body.style.backgroundColor = '#ffffff'; 
     } else {
-      document.body.style.backgroundColor = '#333333'; 
+      document.body.style.backgroundColor = '#29313d'; 
     }
   };
 
+  return { isDarkMode, toggleDarkMode };
+};
+
+const DarkModeButton = () => {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   return (
-    <button onClick={toggleDarkMode}>
-      {isDarkMode ? '☀️ Mode Clair' : '🌑 Mode Sombre'}
+    <button
+      className={`rounded-full p-2 text-sm sm:text-base ${
+        isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-gray-800'
+      }`}
+      onClick={toggleDarkMode}
+    >
+      {isDarkMode ? 'Light Mode' : 'Dark Mode'}
     </button>
   );
 };
 
-export default Darkmode;
+export default DarkModeButton;

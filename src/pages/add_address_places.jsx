@@ -9,7 +9,7 @@ const placeTypes = {
   parc: 'Parc',
 };
 
-// Initial Form Values
+
 const initialValues = {
   name: '',
   address: '',
@@ -28,32 +28,31 @@ const initialValues = {
   publicOrPrivate: '',
 };
 
-// Validation Schema
+
 const validationSchema = Yup.object({
-  name: Yup.string().required('Required'),
-  address: Yup.string().required('Required'),
-  city: Yup.string().required('Required'),
-  postalCode: Yup.string().required('Required'),
-  country: Yup.string().required('Required'),
+  name: Yup.string().required('Name Required'),
+  address: Yup.string().required('Address Required'),
+  city: Yup.string().required('City Required'),
+  postalCode: Yup.string().required('Postal Code Required'),
+  country: Yup.string().required('Country Required'),
   
 });
 
-// Main Component
+
 const add_address_places = () => {
   const [activeType, setActiveType] = useState(null);
 
-  // Submission Handler
+  
   const handleSubmit = (values) => {
     console.log(values);
   };
 
-  // Dynamic Fields Based on Active Type
+  
   const renderDynamicFields = (type) => {
     switch (type) {
       case 'restaurant':
         return (<>
-         <Field as="select" name="cuisineType" className="mt-1 block w-full">
-            {/* Add your options here */}
+         <Field as="select" name="cuisineType" className="p-2 rounded border">
             <option value="">Select Cuisine Type</option>
             <option value="italien">Italian</option>
             <option value="français">French</option>
@@ -65,8 +64,8 @@ const add_address_places = () => {
             <option value="végétarien">Vegetarian</option>
             <option value="autre">Other</option>
           </Field>
-          <ErrorMessage name="cuisineType" component="div" className="text-red-500" />
-          <Field as="select" name="stars" className="mt-1 block w-full">
+          <ErrorMessage name="stars" component="div" className="text-red-500" />
+          <Field as="select" name="stars" className="p-2 rounded border">
             <option value="">Select Stars</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -74,8 +73,8 @@ const add_address_places = () => {
             <option value="4">4</option>
             <option value="5">5</option>
           </Field>
-          <ErrorMessage name="stars" component="div" className="text-red-500" />
-          <Field as="select" name="averagePrice" className="mt-1 block w-full">
+          <ErrorMessage name="averagePrice" component="div" className="text-red-500" />
+          <Field as="select" name="averagePrice" className="p-2 rounded border">
             <option value="">Select Average Price</option>
             <option value="€">€</option>
             <option value="€€">€€</option>
@@ -86,11 +85,11 @@ const add_address_places = () => {
       case 'musee':
         return (
           <>
-         <Field as="select" name="artisticMovement" className="mt-1 block w-full">
+         <Field as="select" name="artMovement" className="p-2 rounded border">
               <option value="">Select Artistic Movement</option>
             </Field>
-            <ErrorMessage name="artisticMovement" component="div" className="text-red-500" />
-            <Field as="select" name="typeOfArt" className="mt-1 block w-full">
+            <ErrorMessage name="artMovement" component="div" className="text-red-500" />
+            <Field as="select" name="artType" className="p-2 rounded border">
               <option value="">Select Type of Art</option>
               <option value="peinture">Painting</option>
               <option value="sculpture">Sculpture</option>
@@ -98,8 +97,8 @@ const add_address_places = () => {
               <option value="dessin">Drawing</option>
               <option value="autre">Other</option>
             </Field>
-            <ErrorMessage name="typeOfArt" component="div" className="text-red-500" />
-            <Field as="select" name="freeOrPaid" className="mt-1 block w-full">
+            <ErrorMessage name="artType" component="div" className="text-red-500" />
+            <Field as="select" name="freeOrPaid" className="p-2 rounded border">
               <option value="">Select Free or Paid</option>
               <option value="gratuit">Free</option>
               <option value="payant">Paid</option>
@@ -110,7 +109,7 @@ const add_address_places = () => {
       case 'bar':
         return (
           <>
-       <Field as="select" name="barType" className="mt-1 block w-full">
+       <Field as="select" name="barType" className="p-2 rounded border">
           <ErrorMessage name="barType" component="div" className="text-red-500" />
          <option value="">Select Bar Type</option>
           <option value="pub">Pub</option>
@@ -126,7 +125,7 @@ const add_address_places = () => {
       case 'parc':
         return (
           <>
-          <Field as="select" name="parkType" className="mt-1 block w-full">
+          <Field as="select" name="parkType" className="p-2 rounded border">
     <option value="">Select Park Type</option>
     <option value="national">National</option>
     <option value="régional">Regional</option>
@@ -136,10 +135,10 @@ const add_address_places = () => {
     <option value="zoologique">Zoological</option>
     <option value="aquatique">Aquatic</option>
     <option value="d'attraction">Amusement</option>
-    <option value="enfant">Enfant</option>
+    <option value="enfant">Children</option>
   </Field>
   <ErrorMessage name="parkType" component="div" className="text-red-500" />
-   <Field as="select" name="publicOrPrivate" className="mt-1 block w-full">
+   <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
     <option value="">Select Public or Private</option>
     <option value="public">Public</option>
     <option value="privé">Private</option>
@@ -159,19 +158,21 @@ const add_address_places = () => {
           <h1 className="text-xl font-semibold">Add Place</h1>
         </nav>
         <div className="p-8">
-          <h1 className="text-xl font-semibold mb-4">Form</h1>
-          <div className="flex gap-4 mb-8">
-            {Object.keys(placeTypes).map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setActiveType(type)}
-                className={`px-4 py-2 rounded text-white ${activeType === type ? 'bg-indigo-500' : 'bg-indigo-300'}`}
-              >
-                {placeTypes[type]}
-              </button>
-            ))}
-          </div>
+          <h1 className="text-xl font-semibold mb-4">Add Places</h1>
+          <div className="flex flex-wrap justify-start text-xs md:text-sm lg:text-base gap-4 mb-8">
+  {Object.keys(placeTypes).map((type) => (
+    <button
+      key={type}
+      type="button"
+      onClick={() => setActiveType(type)}
+      className={`flex-auto px-4 py-2 rounded text-white ${activeType === type ? 'bg-indigo-500' : 'bg-indigo-300'}`}
+      style={{ minWidth: 'calc(15% - 8px)' }}
+    >
+      {placeTypes[type]}
+    </button>
+  ))}
+</div>
+
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -180,16 +181,21 @@ const add_address_places = () => {
             {() => (
               <Form className="flex flex-col space-y-4">
                  <Field type="text" name="name" placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
-            <ErrorMessage name="name" component="div" className="text-red-500" />
-                
-                <Field type="text" name="Address" placeholder="Address" className="p-2 rounded border" />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
+                
+                <Field type="text" name="address" placeholder="Address" className="p-2 rounded border" />
+                <ErrorMessage name="address" component="div" className="text-red-500" />
 
+                <Field type="text" name="city" placeholder="City" className="p-2 rounded border" />
+                <ErrorMessage name="city" component="div" className="text-red-500" />
                 
-                <Field type="text" name="postal code" placeholder="Postal Code" className="p-2 rounded border" />
-                <ErrorMessage name="name" component="div" className="text-red-500" />
+                <Field type="text" name="postalCode" placeholder="Postal Code" className="p-2 rounded border" />
+                <ErrorMessage name="postalCode" component="div" className="text-red-500" />
+
                 <Field type="text" name="country" placeholder="Country" className="p-2 rounded border" />
-                <ErrorMessage name="name" component="div" className="text-red-500" />
+                <ErrorMessage name="country" component="div" className="text-red-500" />
+
+
                 {activeType && renderDynamicFields(activeType)}
                 
                 <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">

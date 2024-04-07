@@ -38,7 +38,7 @@ const HomePage = () => {
 
   return (
     <div className="flex justify-center mt-28">
-      <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white">
+      <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
             <th onClick={() => sortAdresses('street')}>Rue</th>
@@ -53,11 +53,11 @@ const HomePage = () => {
           {adresses.map((adresse, index) => (
             <tr key={index} className="hover:bg-blue-100">
               <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.street}</Link></td>
-              <td>{adresse.name}</td>
-              <td>{adresse.city}</td>
-              <td>{adresse.country}</td>
-              <td>{adresse.postalCode}</td>
-              <td>{adresse.type}</td>
+              <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.name}</Link></td>
+              <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.city}</Link></td>
+              <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.country}</Link></td>
+              <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.postalCode}</Link></td>
+              <td><Link href ={`/addresses/${adresse._id}/edit`}>{adresse.type}</Link></td>
             </tr>
           ))}
         </tbody>
