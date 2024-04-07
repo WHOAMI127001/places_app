@@ -5,9 +5,9 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
  
 
-export const getServerSideProps = async ({ params: { addresseId } }) => {
+export const getServerSideProps = async ({ params: { addressId } }) => {
     const { data: address } = await axios(
-      `http://localhost:3000/api/addresses/${addresseId}`,
+      `http://localhost:3000/api/addresses/${addressId}`,
     )
   
     return {
@@ -15,6 +15,18 @@ export const getServerSideProps = async ({ params: { addresseId } }) => {
     }
   }
 
+  const initialValues = {
+    name: '',
+    street: '',
+    city: '',
+    country: '',
+    postalCode: '',
+    type: '', // Initialize with an empty string or a default type if applicable
+    artMovement: '', // Only relevant for certain types, e.g., "Musée"
+    artType: '', // Only relevant for certain types, e.g., "Musée"
+    freeOrPaid: '', // Consider if you want a default state such as "Free" or "Paid", or keep it empty for user selection
+    price: ''
+  };
 // Définition des types de lieu
 const placeTypes = {
   restaurant: 'Restaurant',
@@ -144,10 +156,7 @@ const Edit = ({address}) => {
                 {/* Champs dynamiques */}
                 {activeType && renderDynamicFields(activeType)}
 
-                {/* Bouton de soumission */}
-                <Button type="submit">
-                  Modify {activeType ? placeTypes[activeType] : 'Place'}
-                </Button>
+              
               </Form>
             )}
           </Formik>
