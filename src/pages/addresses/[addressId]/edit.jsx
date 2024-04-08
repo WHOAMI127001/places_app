@@ -21,13 +21,12 @@ export const getServerSideProps = async ({ params: { addressId } }) => {
     city: '',
     country: '',
     postalCode: '',
-    type: '', // Initialize with an empty string or a default type if applicable
-    artMovement: '', // Only relevant for certain types, e.g., "Musée"
-    artType: '', // Only relevant for certain types, e.g., "Musée"
-    freeOrPaid: '', // Consider if you want a default state such as "Free" or "Paid", or keep it empty for user selection
+    type: '', 
+    artMovement: '', 
+    artType: '', 
+    freeOrPaid: '', 
     price: ''
   };
-// Définition des types de lieu
 const placeTypes = {
   restaurant: 'Restaurant',
   musee: 'Musée',
@@ -63,11 +62,36 @@ const Edit = ({address}) => {
   const renderDynamicFields = (type) => {
     switch (type) {
       case 'restaurant':
-        return (
-          <>
-            {/* Champs spécifiques aux restaurants */}
-          </>
-        );
+        return (<>
+          <Field as="select" name="cuisineType" className="p-2 rounded border">
+             <option value="">Select Cuisine Type</option>
+             <option value="italien">Italian</option>
+             <option value="français">French</option>
+             <option value="chinois">Chinese</option>
+             <option value="indien">Indian</option>
+             <option value="japonais">Japanese</option>
+             <option value="mexicain">Mexican</option>
+             <option value="thai">Thai</option>
+             <option value="végétarien">Vegetarian</option>
+             <option value="autre">Other</option>
+           </Field>
+           <ErrorMessage name="stars" component="div" className="text-red-500" />
+           <Field as="select" name="stars" className="p-2 rounded border">
+             <option value="">Select Stars</option>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+           
+           </Field>
+           <ErrorMessage name="averagePrice" component="div" className="text-red-500" />
+           <Field as="select" name="averagePrice" className="p-2 rounded border">
+             <option value="">Select Average Price</option>
+             <option value="€">€</option>
+             <option value="€€">€€</option>
+             <option value="€€€">€€€</option>
+ </Field>
+           </>
+           );
       case 'musee':
         return (
           <>
@@ -96,14 +120,41 @@ const Edit = ({address}) => {
       case 'bar':
         return (
           <>
-            {/* Champs spécifiques aux bars */}
-          </>
+          <Field as="select" name="barType" className="p-2 rounded border">
+             <ErrorMessage name="barType" component="div" className="text-red-500" />
+            <option value="">Select Bar Type</option>
+             <option value="pub">Pub</option>
+             <option value="bar à vin">Wine Bar</option>
+             <option value="bar à cocktail">Cocktail Bar</option>
+             <option value="bar à bière">Beer Bar</option>
+             <option value="bar à jus">Juice Bar</option>
+             <option value="autre">Other</option>
+              </Field>
+               {/* Bar Specific Fields */}
+             </>
         );
       case 'parc':
         return (
           <>
-            {/* Champs spécifiques aux parcs */}
-          </>
+          <Field as="select" name="parkType" className="p-2 rounded border">
+    <option value="">Select Park Type</option>
+    <option value="national">National</option>
+    <option value="régional">Regional</option>
+    <option value="urbain">Urban</option>
+    <option value="forestier">Forest</option>
+    <option value="botanique">Botanical</option>
+    <option value="zoologique">Zoological</option>
+    <option value="aquatique">Aquatic</option>
+    <option value="d'attraction">Amusement</option>
+    <option value="enfant">Children</option>
+  </Field>
+  <ErrorMessage name="parkType" component="div" className="text-red-500" />
+   <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
+    <option value="">Select Public or Private</option>
+    <option value="public">Public</option>
+    <option value="privé">Private</option>
+  </Field>
+</>
         );
       default:
  return null;
@@ -155,15 +206,29 @@ const Edit = ({address}) => {
 
                 {/* Champs dynamiques */}
                 {activeType && renderDynamicFields(activeType)}
+                <button
+        type="submit"
+        className="mt-4 px-4 py-2 bg-indigo-500 text-white font-semibold rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
+      >
+        Save Changes
+      </button>
 
+      {/* Bouton Supprimer (Delete) */}
+      <button
+        type="button"
+        onClick={handledelete} // Notez que la fonction s'appelle `handledelete` dans votre code
+        className="mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
+      >
+        Delete
+      </button>
               
               </Form>
             )}
-          </Formik>
+</Formik>
         </div>
       </div>
     </div>
   );
 };
 
-export default Edit;
+export default Edit

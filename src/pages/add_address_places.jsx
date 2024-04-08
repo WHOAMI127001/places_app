@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
+
+import { useRouter } from 'next/router'
+
 
 const placeTypes = {
   restaurant: 'Restaurant',
@@ -39,9 +42,18 @@ const add_address_places = () => {
   const [activeType, setActiveType] = useState(null);
 
   
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/addresses', values);
+      resetForm();
+      setSubmitting(false);
+      // Rediriger l'utilisateur vers la page de détail de l'adresse nouvellement créée
+      router.push(`/addresses/${response.data._id}`);
+    } catch (error) {
+      console.error('Error adding the address:', error);
+      setSubmitting(false);
+    }
+  }
 
   const renderDynamicFields = (type) => {
     switch (type) {
@@ -65,8 +77,7 @@ const add_address_places = () => {
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+          
           </Field>
           <ErrorMessage name="averagePrice" component="div" className="text-red-500" />
           <Field as="select" name="averagePrice" className="p-2 rounded border">
@@ -194,6 +205,8 @@ const add_address_places = () => {
                 <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">
                   Add {activeType ? placeTypes[activeType] : 'Place'}
                 </button>
+
+            
               </Form>
             )}
           </Formik>
@@ -202,4 +215,4 @@ const add_address_places = () => {
     </div>
   );
 };
-export default add_address_places;
+export default add_address_places
