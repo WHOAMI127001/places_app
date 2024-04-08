@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-import axios from 'axios'
-import { useRouter } from 'next/router'
+/* eslint-disable max-lines */
+
+import React, { useState } from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
+import { useRouter } from "next/router"
  
 
 export const getServerSideProps = async ({ params: { addressId } }) => {
@@ -14,26 +16,14 @@ export const getServerSideProps = async ({ params: { addressId } }) => {
       props: { address },
     }
   }
-
-  const initialValues = {
-    name: '',
-    street: '',
-    city: '',
-    country: '',
-    postalCode: '',
-    type: '', 
-    artMovement: '', 
-    artType: '', 
-    freeOrPaid: '', 
-    price: ''
-  };
 const placeTypes = {
-  restaurant: 'Restaurant',
-  musee: 'Musée',
-  bar: 'Bar',
-  parc: 'Parc'
-};
-
+  restaurant: "Restaurant",
+  musee: "Musée",
+  bar: "Bar",
+  parc: "Parc"
+}
+// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-lines-per-function
 const Edit = ({address}) => {
   const router = useRouter()
   const handleSubmit = async (datas) => {
@@ -41,27 +31,23 @@ const Edit = ({address}) => {
     await axios.patch(`/api/addresses/${_id}`, { ...otherProps })
     router.push(`/addresses/${_id}`)
   }
-  const [activeType, setActiveType] = useState(null);
-
- 
+  const [activeType, setActiveType] = useState(null)
   const handledelete = async () => {
     await axios.delete(`/api/addresses/${address._id}`)
-    router.push('/')
+    router.push("/")
   }
-
   // Schéma de validation
   const validationSchema = Yup.object({
-    name: Yup.string().required('Name is required'),
-    address: Yup.string().required('Address is required'),
-    city: Yup.string().required('City is required'),
-    postalCode: Yup.string().required('Postal Code is required'),
-    country: Yup.string().required('Country is required'),
-  });
-
+    name: Yup.string().required("Name is required"),
+    address: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
+    postalCode: Yup.string().required("Postal Code is required"),
+    country: Yup.string().required("Country is required"),
+  })
   // Champs dynamiques en fonction du type actif
   const renderDynamicFields = (type) => {
     switch (type) {
-      case 'restaurant':
+      case "restaurant":
         return (<>
           <Field as="select" name="cuisineType" className="p-2 rounded border">
              <option value="">Select Cuisine Type</option>
@@ -91,8 +77,9 @@ const Edit = ({address}) => {
              <option value="€€€">€€€</option>
  </Field>
            </>
-           );
-      case 'musee':
+           )
+
+      case "musee":
         return (
           <>
              <Field as="select" name="artisticMovement" className="mt-1 block w-full">
@@ -116,8 +103,9 @@ const Edit = ({address}) => {
             <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" /> 
 
           </>
-        );
-      case 'bar':
+        )
+
+      case "bar":
         return (
           <>
           <Field as="select" name="barType" className="p-2 rounded border">
@@ -132,8 +120,9 @@ const Edit = ({address}) => {
               </Field>
                {/* Bar Specific Fields */}
              </>
-        );
-      case 'parc':
+        )
+
+      case "parc":
         return (
           <>
           <Field as="select" name="parkType" className="p-2 rounded border">
@@ -155,11 +144,12 @@ const Edit = ({address}) => {
     <option value="privé">Private</option>
   </Field>
 </>
-        );
+        )
+
       default:
- return null;
+ return null
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -175,14 +165,14 @@ const Edit = ({address}) => {
                 key={type}
                 type="button"
                 onClick={() => setActiveType(type)}
-                className={`px-4 py-2 rounded text-white ${activeType === type ? 'bg-indigo-500' : 'bg-indigo-300'}`}
+                className={`px-4 py-2 rounded text-white ${activeType === type ? "bg-indigo-500" : "bg-indigo-300"}`}
               >
                 {placeTypes[type]}
               </button>
             ))}
           </div>
           <Formik
-            initialValues={initialValues}
+            initialValues={address}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
@@ -192,8 +182,8 @@ const Edit = ({address}) => {
                 <Field type="text" name="name" className="p-2 rounded border" />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
 
-                <Field type="text" name="address" className="p-2 rounded border" />
-                <ErrorMessage name="address" component="div" className="text-red-500" />
+                <Field type="text" name="street" className="p-2 rounded border" />
+                <ErrorMessage name="street" component="div" className="text-red-500" />
 
                 <Field type="text" name="city" className="p-2 rounded border" />
                 <ErrorMessage name="city" component="div" className="text-red-500" />
@@ -228,7 +218,7 @@ const Edit = ({address}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Edit
