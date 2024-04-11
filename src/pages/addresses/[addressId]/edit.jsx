@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 
-import React, { useState } from "react"
+import React  from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
@@ -16,27 +16,19 @@ export const getServerSideProps = async ({ params: { addressId } }) => {
       props: { address },
     }
   }
-const placeTypes = {
-  restaurant: "Restaurant",
-  musee: "Musée",
-  bar: "Bar",
-  parc: "Parc"
-}
 // eslint-disable-next-line max-lines-per-function
 // eslint-disable-next-line max-lines-per-function
 const Edit = ({address}) => {
   const router = useRouter()
   const handleSubmit = async (datas) => {
-    const { _id, ...otherProps} = datas
+    const {_id, ...otherProps} = datas
     await axios.patch(`/api/addresses/${_id}`, { ...otherProps })
     router.push(`/addresses/${_id}`)
   }
-  const [activeType, setActiveType] = useState(null)
   const handledelete = async () => {
     await axios.delete(`/api/addresses/${address._id}`)
     router.push("/")
   }
-  // Schéma de validation
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     address: Yup.string().required("Address is required"),
@@ -44,9 +36,9 @@ const Edit = ({address}) => {
     postalCode: Yup.string().required("Postal Code is required"),
     country: Yup.string().required("Country is required"),
   })
-  // Champs dynamiques en fonction du type actif
-  const renderDynamicFields = (type) => {
-    switch (type) {
+  // eslint-disable-next-line max-lines-per-function
+  const renderDynamicFields = () => {
+    switch (address.type) {
       case "restaurant":
         return (<>
           <Field as="select" name="cuisineType" className="p-2 rounded border">
@@ -160,25 +152,22 @@ const Edit = ({address}) => {
         <div className="p-8">
           <h1 className="text-xl font-semibold mb-4">{address.name}</h1>
           <div className="flex gap-4 mb-8">
-            {Object.keys(placeTypes).map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setActiveType(type)}
-                className={`px-4 py-2 rounded text-white ${activeType === type ? "bg-indigo-500" : "bg-indigo-300"}`}
-              >
-                {placeTypes[type]}
-              </button>
-            ))}
+            
           </div>
           <Formik
-            initialValues={address}
+            initialValues={{
+              name: address.name,
+              street: address.street,
+              city: address.city,
+              postalCode: address.postalCode,
+              country: address.country,
+          
+            }}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onClick={handleSubmit}
           >
             {() => (
               <Form className="flex flex-col space-y-4">
-                {/* Champs de l'adresse */}
                 <Field type="text" name="name" className="p-2 rounded border" />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
 
@@ -195,18 +184,20 @@ const Edit = ({address}) => {
                 <ErrorMessage name="country" component="div" className="text-red-500" />
 
                 {/* Champs dynamiques */}
-                {activeType && renderDynamicFields(activeType)}
+                {renderDynamicFields}
+
                 <button
-        type="submit"
+        type="button"
+        onClick={handleSubmit}
         className="mt-4 px-4 py-2 bg-indigo-500 text-white font-semibold rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
       >
-        Save Changes
+        Edit Places
       </button>
 
-      {/* Bouton Supprimer (Delete) */}
+      
       <button
         type="button"
-        onClick={handledelete} // Notez que la fonction s'appelle `handledelete` dans votre code
+        onClick={handledelete} 
         className="mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
       >
         Delete

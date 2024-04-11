@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getServerSideProps = async ({ params: { addresseId } }) => {
+export const getServerSideProps = async ({ params: { addressId } }) => {
   const { data: address } = await axios(
-    `http://localhost:3000/api/addresses/${addresseId}`,
+    `http://localhost:3000/api/addresses/${addressId}`,
   )
 
   return {

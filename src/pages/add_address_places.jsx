@@ -1,61 +1,70 @@
 import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
+import axios from "axios"
+import { useRouter } from "next/router"
+export const getServerSideProps = async () => {
+  const { data: address } = await axios("http://localhost:3000/api/addresses")
 
-import { useRouter } from 'next/router'
-
+  return {
+    props: {
+      addresses: address || [],
+      placeTypes,
+      initialValues,
+    },
+  }
+}
 
 const placeTypes = {
-  restaurant: 'Restaurant',
-  musee: 'Musée',
-  bar: 'Bar',
-  parc: 'Parc',
-};
+  restaurant: "Restaurant",
+  musee: "Musée",
+  bar: "Bar",
+  parc: "Parc",
+}
 const initialValues = {
-  name: '',
-  address: '',
-  city: '',
-  postalCode: '',
-  country: '',
-  cuisineType: '',
-  stars: '',
-  averagePrice: '',
-  artisticMovement: '',
-  typeOfArt: '',
-  freeOrPaid: '',
-  price: '',
-  barType: '',
-  parkType: '',
-  publicOrPrivate: '',
-};
+  name: "",
+  address: "",
+  city: "",
+  postalCode: "",
+  country: "",
+  cuisineType: "",
+  stars: "",
+  averagePrice: "",
+  artisticMovement: "",
+  typeOfArt: "",
+  freeOrPaid: "",
+  price: "",
+  barType: "",
+  parkType: "",
+  publicOrPrivate: "",
+}
 const validationSchema = Yup.object({
-  name: Yup.string().required('Name Required'),
-  address: Yup.string().required('Address Required'),
-  city: Yup.string().required('City Required'),
-  postalCode: Yup.string().required('Postal Code Required'),
-  country: Yup.string().required('Country Required'),
+  name: Yup.string().required("Name Required"),
+  address: Yup.string().required("Address Required"),
+  city: Yup.string().required("City Required"),
+  postalCode: Yup.string().required("Postal Code Required"),
+  country: Yup.string().required("Country Required"),
   
-});
-
+})
 
 const add_address_places = () => {
+  const router = useRouter();
   const [activeType, setActiveType] = useState(null);
 
-  
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/addresses', values);
-      resetForm();
-      setSubmitting(false);
-      // Rediriger l'utilisateur vers la page de détail de l'adresse nouvellement créée
+      // Envoi de la requête POST à l'API pour ajouter une nouvelle adresse
+      const response = await axios.post("http://localhost:3000/api/addresses", values);
+      
+      // Redirection vers la page d'édition de l'adresse nouvellement ajoutée
       router.push(`/addresses/${response.data._id}`);
     } catch (error) {
-      console.error('Error adding the address:', error);
+      console.error("Error adding the address:", error);
+    } finally {
       setSubmitting(false);
     }
   }
-
-  const renderDynamicFields = (type) => {
+const renderDynamicFields = (type) => {
     switch (type) {
       case 'restaurant':
         return (<>
@@ -87,8 +96,8 @@ const add_address_places = () => {
             <option value="€€€">€€€</option>
 </Field>
           </>
-          );
-      case 'musee':
+          )
+      case "musee":
         return (
           <>
          <Field as="select" name="artMovement" className="p-2 rounded border">
@@ -111,7 +120,7 @@ const add_address_places = () => {
             </Field>
             <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" />
           </>
-        );
+        )
       case 'bar':
         return (
           <>
@@ -125,9 +134,8 @@ const add_address_places = () => {
           <option value="bar à jus">Juice Bar</option>
           <option value="autre">Other</option>
            </Field>
-            {/* Bar Specific Fields */}
           </>
-        );
+        )
       case 'parc':
         return (
           <>
@@ -151,11 +159,11 @@ const add_address_places = () => {
   </Field>
 </>
 
-);
+)
       default:
         return null;
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -213,6 +221,6 @@ const add_address_places = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 export default add_address_places
