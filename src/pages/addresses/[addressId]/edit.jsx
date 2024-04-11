@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useRouter } from "next/router"
+import { Button } from "@/components/Button"
  
 
 export const getServerSideProps = async ({ params: { addressId } }) => {
@@ -155,16 +156,11 @@ const Edit = ({address}) => {
             
           </div>
           <Formik
-            initialValues={{
-              name: address.name,
-              street: address.street,
-              city: address.city,
-              postalCode: address.postalCode,
-              country: address.country,
-          
-            }}
+            initialValues={
+              address
+              }
             validationSchema={validationSchema}
-            onClick={handleSubmit}
+            onSubmit={handleSubmit}
           >
             {() => (
               <Form className="flex flex-col space-y-4">
@@ -186,22 +182,14 @@ const Edit = ({address}) => {
                 {/* Champs dynamiques */}
                 {renderDynamicFields}
 
-                <button
-        type="button"
-        onClick={handleSubmit}
-        className="mt-4 px-4 py-2 bg-indigo-500 text-white font-semibold rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
-      >
-        Edit Places
-      </button>
+    <Button type="submit" >Edit places 
+    
+    </Button>
 
       
-      <button
-        type="button"
-        onClick={handledelete} 
-        className="mt-2 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
-      >
-        Delete
-      </button>
+      <Button  onClick={handledelete} >Delete</Button>
+  
+      
               
               </Form>
             )}

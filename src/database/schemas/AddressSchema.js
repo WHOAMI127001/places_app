@@ -29,13 +29,11 @@ export const addressSchema = new Schema({
   cuisineType: String,
   starRating: {
     type: Number,
-    min: 1,
-    max: 3,
+   
   },
   cuisineAveragePrice: {
     type: Number,
-    min: 1,
-    max: 5,
+    
   },
   // Champs spécifiques aux musées
   artMovement: String,
@@ -49,8 +47,7 @@ export const addressSchema = new Schema({
   barType: String,
   barAveragePrice: {
     type: Number,
-    min: 1,
-    max: 5,
+  
   },
   // Champs spécifiques aux parcs
   parkType: String,

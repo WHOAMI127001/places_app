@@ -3,17 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useRouter } from "next/router"
-export const getServerSideProps = async () => {
-  const { data: address } = await axios("http://localhost:3000/api/addresses")
 
-  return {
-    props: {
-      addresses: address || [],
-      placeTypes,
-      initialValues,
-    },
-  }
-}
+
 
 const placeTypes = {
   restaurant: "Restaurant",
@@ -37,7 +28,7 @@ const initialValues = {
   barType: "",
   parkType: "",
   publicOrPrivate: "",
-}
+};
 const validationSchema = Yup.object({
   name: Yup.string().required("Name Required"),
   address: Yup.string().required("Address Required"),
@@ -46,23 +37,28 @@ const validationSchema = Yup.object({
   country: Yup.string().required("Country Required"),
   
 })
-
-const add_address_places = () => {
-  const router = useRouter();
-  const [activeType, setActiveType] = useState(null);
-
-  const handleSubmit = async (values, { setSubmitting }) => {
-    try {
-      // Envoi de la requête POST à l'API pour ajouter une nouvelle adresse
-      const response = await axios.post("http://localhost:3000/api/addresses", values);
-      
-      // Redirection vers la page d'édition de l'adresse nouvellement ajoutée
-      router.push(`/addresses/${response.data._id}`);
-    } catch (error) {
-      console.error("Error adding the address:", error);
-    } finally {
-      setSubmitting(false);
-    }
+// eslint-disable-next-line max-lines-per-function
+const add_address_places = (props) => {
+  const { addresses: initialAddresses } = props
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [activeType, setActiveType] = useState(null)
+ const [addresses, setAddresses] = useState(initialAddresses)
+ const submit = async ({  name,
+    street,
+    city,
+    postalCode,
+    country, ...otherProps }, { resetForm }) => {
+    const { data: newAddress } = await axios.post("/api/addresses", {
+      name,
+      street,
+      city,
+      postalCode,
+      country,
+      type: activeType,
+      ...otherProps,
+    })
+    setAddresses([newAddress, ...addresses])
+    resetForm()
   }
 const renderDynamicFields = (type) => {
     switch (type) {
@@ -188,9 +184,9 @@ const renderDynamicFields = (type) => {
 </div>
 
       <Formik
-            initialValues={initialValues}
+      initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={submit}
           >
             {() => (
               <Form className="flex flex-col space-y-4">
@@ -223,4 +219,5 @@ const renderDynamicFields = (type) => {
     </div>
   )
 }
+
 export default add_address_places
