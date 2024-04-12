@@ -4,14 +4,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useRouter } from "next/router"
-
 const placeTypes = {
   restaurant: "Restaurant",
   musee: "Musée",
   bar: "Bar",
   parc: "Parc",
 }
-
 const validationSchema = Yup.object({
   name: Yup.string().nullable().required("Name Required"),
   street: Yup.string().nullable().required("Address Required"),
@@ -20,7 +18,6 @@ const validationSchema = Yup.object({
   country: Yup.string().nullable().required("Country Required"),
 })
 // eslint-disable-next-line max-lines-per-function
-
 const add_address_places = (props) => {
   const { addresses: initialAddresses } = props;
   const [activeType, setActiveType] = useState(null);
@@ -39,10 +36,7 @@ const submit = async (values, { resetForm,}) => {
     setAddresses([newAddress, ...addresses]);
     resetForm();
 }
-
-
-
-  const renderDynamicFields = (type ) => {
+const renderDynamicFields = (type ) => {
     switch (type ) {
       case 'restaurant':
         return (<>
@@ -165,37 +159,52 @@ const submit = async (values, { resetForm,}) => {
     </button>
   ))}
 </div>
+<Formik
+  initialValues={{
+    name: "",
+    street: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    cuisineType: "",
+    stars: "",
+    averagePrice: "",
+    artMovement: "",
+    artType: "",
+    freeOrPaid: "",
+    barType: "",
+    parkType: "",
+    publicOrPrivate: "",
+  }}
+  validationSchema={validationSchema}
+  onSubmit={submit}
+>
+  {({ values }) => (
+    <Form className="flex flex-col space-y-4">
+      <Field type="text" name="name" placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
+      <ErrorMessage name="name" component="div" className="text-red-500" />
 
-      <Formik
-           validationSchema={validationSchema}
-            onSubmit={submit}
-          >
-            {() => (
-              <Form className="flex flex-col space-y-4">
-                 <Field type="text" name="name"  placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
-                <ErrorMessage name="name" component="div" className="text-red-500" />
-                
-                <Field type="text" name="street" placeholder="street" className="p-2 rounded border" />
-                <ErrorMessage name="street" component="div" className="text-red-500" />
+      <Field type="text" name="street" placeholder="Street" className="p-2 rounded border" />
+      <ErrorMessage name="street" component="div" className="text-red-500" />
 
-                <Field type="text" name="city" placeholder="City" className="p-2 rounded border" />
-                <ErrorMessage name="city" component="div" className="text-red-500" />
-                
-                <Field type="text" name="postalCode" placeholder="Postal Code" className="p-2 rounded border" />
-                <ErrorMessage name="postalCode" component="div" className="text-red-500" />
+      <Field type="text" name="city" placeholder="City" className="p-2 rounded border" />
+      <ErrorMessage name="city" component="div" className="text-red-500" />
 
-                <Field type="text" name="country" placeholder="Country" className="p-2 rounded border" />
-                <ErrorMessage name="country" component="div" className="text-red-500" />
-     {activeType && renderDynamicFields(activeType)}
-                
-                <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">
-                  Add {activeType ? placeTypes[activeType] : 'Place'}
-                </button>
+      <Field type="text" name="postalCode" placeholder="Postal Code" className="p-2 rounded border" />
+      <ErrorMessage name="postalCode" component="div" className="text-red-500" />
 
-            
-              </Form>
-            )}
-          </Formik>
+      <Field type="text" name="country" placeholder="Country" className="p-2 rounded border" />
+      <ErrorMessage name="country" component="div" className="text-red-500" />
+
+      {activeType && renderDynamicFields(activeType)}
+
+      <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">
+        Add {activeType ? placeTypes[activeType] : 'Place'}
+      </button>
+    </Form>
+  )}
+</Formik>
+     
         </div>
       </div>
     </div>
