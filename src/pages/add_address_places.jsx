@@ -1,10 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useRouter } from "next/router"
-
-
 
 const placeTypes = {
   restaurant: "Restaurant",
@@ -12,56 +11,39 @@ const placeTypes = {
   bar: "Bar",
   parc: "Parc",
 }
-const initialValues = {
-  name: "",
-  address: "",
-  city: "",
-  postalCode: "",
-  country: "",
-  cuisineType: "",
-  stars: "",
-  averagePrice: "",
-  artisticMovement: "",
-  typeOfArt: "",
-  freeOrPaid: "",
-  price: "",
-  barType: "",
-  parkType: "",
-  publicOrPrivate: "",
-};
+
 const validationSchema = Yup.object({
-  name: Yup.string().required("Name Required"),
-  address: Yup.string().required("Address Required"),
-  city: Yup.string().required("City Required"),
-  postalCode: Yup.string().required("Postal Code Required"),
-  country: Yup.string().required("Country Required"),
-  
+  name: Yup.string().nullable().required("Name Required"),
+  street: Yup.string().nullable().required("Address Required"),
+  city: Yup.string().nullable().required("City Required"),
+  postalCode: Yup.number().nullable().required("Postal Code Required"),
+  country: Yup.string().nullable().required("Country Required"),
 })
 // eslint-disable-next-line max-lines-per-function
+
 const add_address_places = (props) => {
-  const { addresses: initialAddresses } = props
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [activeType, setActiveType] = useState(null)
- const [addresses, setAddresses] = useState(initialAddresses)
- const submit = async ({  name,
-    street,
-    city,
-    postalCode,
-    country, ...otherProps }, { resetForm }) => {
-    const { data: newAddress } = await axios.post("/api/addresses", {
-      name,
-      street,
-      city,
-      postalCode,
-      country,
-      type: activeType,
-      ...otherProps,
-    })
-    setAddresses([newAddress, ...addresses])
-    resetForm()
-  }
-const renderDynamicFields = (type) => {
-    switch (type) {
+  const { addresses: initialAddresses } = props;
+  const [activeType, setActiveType] = useState(null);
+  const [addresses, setAddresses] = useState(initialAddresses);
+  const router = useRouter();
+
+const submit = async (values, { resetForm,}) => {
+   
+    const { data: newAddress } = await axios.post(
+      "http://localhost:3000/api/addresses",
+      {
+        ...values,
+        type: activeType,
+      }
+    );
+    setAddresses([newAddress, ...addresses]);
+    resetForm();
+}
+
+
+
+  const renderDynamicFields = (type ) => {
+    switch (type ) {
       case 'restaurant':
         return (<>
          <Field as="select" name="cuisineType" className="p-2 rounded border">
@@ -79,6 +61,7 @@ const renderDynamicFields = (type) => {
           <ErrorMessage name="stars" component="div" className="text-red-500" />
           <Field as="select" name="stars" className="p-2 rounded border">
             <option value="">Select Stars</option>
+            <option value="1">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -184,17 +167,16 @@ const renderDynamicFields = (type) => {
 </div>
 
       <Formik
-      initialValues={initialValues}
-            validationSchema={validationSchema}
+           validationSchema={validationSchema}
             onSubmit={submit}
           >
             {() => (
               <Form className="flex flex-col space-y-4">
-                 <Field type="text" name="name" placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
+                 <Field type="text" name="name"  placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
                 
-                <Field type="text" name="address" placeholder="Address" className="p-2 rounded border" />
-                <ErrorMessage name="address" component="div" className="text-red-500" />
+                <Field type="text" name="street" placeholder="street" className="p-2 rounded border" />
+                <ErrorMessage name="street" component="div" className="text-red-500" />
 
                 <Field type="text" name="city" placeholder="City" className="p-2 rounded border" />
                 <ErrorMessage name="city" component="div" className="text-red-500" />

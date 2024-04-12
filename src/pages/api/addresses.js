@@ -18,7 +18,7 @@ const handler = createRoute(async (req, res) => {
       city,
       name,
       country,
-      type
+      type,
     })
 
     await newAddress.save()

@@ -13,7 +13,7 @@ const handler = createRoute(async (req, res) => {
     return
   }
 
-  // GET /address/[addressId] -> read resource item
+  // GET /address/[addressId] -> get resource item
   if (req.method === "GET") {
     res.send(address)
 
