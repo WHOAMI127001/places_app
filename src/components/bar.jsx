@@ -1,4 +1,6 @@
 import {  Field, ErrorMessage } from "formik"
+import React from "react"
+
     const bar = () => (
     <div> 
     <Field as="select" name="barType" className="p-2 rounded border">

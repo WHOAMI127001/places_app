@@ -3,42 +3,70 @@ import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
-import { useRouter } from "next/router"
 const placeTypes = {
   restaurant: "Restaurant",
   musee: "Musée",
   bar: "Bar",
   parc: "Parc",
 }
+const initialValues = {
+  name: "",
+    street: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    cuisineType: "",
+    StarRating: "",
+    averagePrice: "",
+    artMovement: "",
+    artType: "",
+    barType: "",
+    activeType:"",
+
+}
 const validationSchema = Yup.object({
-  name: Yup.string().nullable().required("Name Required"),
-  street: Yup.string().nullable().required("Address Required"),
-  city: Yup.string().nullable().required("City Required"),
-  postalCode: Yup.number().nullable().required("Postal Code Required"),
-  country: Yup.string().nullable().required("Country Required"),
+  name: Yup.string().required("Name Required"),
+  street: Yup.string().required("Address Required"),
+  city: Yup.string().required("City Required"),
+  postalCode: Yup.number().required("Postal Code Required"),
+  country: Yup.string().required("Country Required"),
+  barType: Yup.string(), 
+ type: Yup.string(),
+
 })
 // eslint-disable-next-line max-lines-per-function
-const add_address_places = (props) => {
-  const { addresses: initialAddresses } = props;
-  const [activeType, setActiveType] = useState(null);
-  const [addresses, setAddresses] = useState(initialAddresses);
-  const router = useRouter();
+const addAddressPlaces = (props) => {
+  const { addresses: initialAddresses } = props
+  const [activeType, setActiveType] = useState(null)
+  const [addresses, setAddresses] = useState(initialAddresses)
+const submit = async ({
+  name,
+  street,
+  city,
+  country,
+  postalCode,
+  
+    ...otherProps
+}, { resetForm,}) => {
+    const { data: newAddress } = 
+    await axios.post("http://localhost:3000/api/addresses",{
+      name,
+      street,
+      city,
+      country,
+      postalCode,
+     type: activeType,
+    
 
-const submit = async (values, { resetForm,}) => {
-   
-    const { data: newAddress } = await axios.post(
-      "http://localhost:3000/api/addresses",
-      {
-        ...values,
-        type: activeType,
-      }
-    );
-    setAddresses([newAddress, ...addresses]);
-    resetForm();
+      ...otherProps
+      })
+    setAddresses([newAddress, ...addresses])
+    resetForm()
 }
-const renderDynamicFields = (type ) => {
-    switch (type ) {
-      case 'restaurant':
+// eslint-disable-next-line max-lines-per-function
+const renderDynamicFields = (type) => {
+    switch (type) {
+      case "restaurant":
         return (<>
          <Field as="select" name="cuisineType" className="p-2 rounded border">
             <option value="">Select Cuisine Type</option>
@@ -52,7 +80,7 @@ const renderDynamicFields = (type ) => {
             <option value="végétarien">Vegetarian</option>
             <option value="autre">Other</option>
           </Field>
-          <ErrorMessage name="stars" component="div" className="text-red-500" />
+          <ErrorMessage name="StarRating" component="div" className="text-red-500" />
           <Field as="select" name="stars" className="p-2 rounded border">
             <option value="">Select Stars</option>
             <option value="1">0</option>
@@ -61,8 +89,8 @@ const renderDynamicFields = (type ) => {
             <option value="3">3</option>
           
           </Field>
-          <ErrorMessage name="averagePrice" component="div" className="text-red-500" />
-          <Field as="select" name="averagePrice" className="p-2 rounded border">
+          <ErrorMessage name="CuisineAveragePrice" component="div" className="text-red-500" />
+          <Field as="select" name="CuisineAveragePrice" className="p-2 rounded border">
             <option value="">Select Average Price</option>
             <option value="€">€</option>
             <option value="€€">€€</option>
@@ -70,6 +98,7 @@ const renderDynamicFields = (type ) => {
 </Field>
           </>
           )
+
       case "musee":
         return (
           <>
@@ -94,7 +123,8 @@ const renderDynamicFields = (type ) => {
             <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" />
           </>
         )
-      case 'bar':
+
+      case "bar":
         return (
           <>
        <Field as="select" name="barType" className="p-2 rounded border">
@@ -109,7 +139,8 @@ const renderDynamicFields = (type ) => {
            </Field>
           </>
         )
-      case 'parc':
+
+      case "parc":
         return (
           <>
           <Field as="select" name="parkType" className="p-2 rounded border">
@@ -133,8 +164,9 @@ const renderDynamicFields = (type ) => {
 </>
 
 )
+
       default:
-        return null;
+        return null
     }
   }
 
@@ -150,36 +182,20 @@ const renderDynamicFields = (type ) => {
   {Object.keys(placeTypes).map((type) => (
     <button
       key={type}
-      type="button"
       onClick={() => setActiveType(type)}
-      className={`flex-auto px-4 py-2 rounded text-white ${activeType === type ? 'bg-indigo-500' : 'bg-indigo-300'}`}
-      style={{ minWidth: 'calc(15% - 8px)' }}
+      className={`flex-auto px-4 py-2 rounded text-white ${activeType === type ? "bg-indigo-500" : "bg-indigo-300"}`}
+      style={{ minWidth: "calc(15% - 8px)" }}
     >
       {placeTypes[type]}
     </button>
   ))}
 </div>
 <Formik
-  initialValues={{
-    name: "",
-    street: "",
-    city: "",
-    postalCode: "",
-    country: "",
-    cuisineType: "",
-    stars: "",
-    averagePrice: "",
-    artMovement: "",
-    artType: "",
-    freeOrPaid: "",
-    barType: "",
-    parkType: "",
-    publicOrPrivate: "",
-  }}
   validationSchema={validationSchema}
   onSubmit={submit}
+  initialValues={initialValues}
 >
-  {({ values }) => (
+  {() => (
     <Form className="flex flex-col space-y-4">
       <Field type="text" name="name" placeholder="Establishment Name" className="mt-1 block w-full p-2 rounded border" />
       <ErrorMessage name="name" component="div" className="text-red-500" />
@@ -199,7 +215,7 @@ const renderDynamicFields = (type ) => {
       {activeType && renderDynamicFields(activeType)}
 
       <button type="submit" className="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600">
-        Add {activeType ? placeTypes[activeType] : 'Place'}
+        Add {activeType ? placeTypes[activeType] : "Place"}
       </button>
     </Form>
   )}
@@ -211,4 +227,4 @@ const renderDynamicFields = (type ) => {
   )
 }
 
-export default add_address_places
+export default addAddressPlaces

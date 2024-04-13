@@ -54,7 +54,7 @@ const Edit = ({address}) => {
              <option value="végétarien">Vegetarian</option>
              <option value="autre">Other</option>
            </Field>
-           <ErrorMessage name="stars" component="div" className="text-red-500" />
+           <ErrorMessage name="starRating" component="div" className="text-red-500" />
            <Field as="select" name="stars" className="p-2 rounded border">
              <option value="">Select Stars</option>
              <option value="1">1</option>
@@ -62,8 +62,8 @@ const Edit = ({address}) => {
              <option value="3">3</option>
            
            </Field>
-           <ErrorMessage name="averagePrice" component="div" className="text-red-500" />
-           <Field as="select" name="averagePrice" className="p-2 rounded border">
+           <ErrorMessage name="CuisineAveragePrice" component="div" className="text-red-500" />
+           <Field as="select" name="CuisineAveragePrice" className="p-2 rounded border">
              <option value="">Select Average Price</option>
              <option value="€">€</option>
              <option value="€€">€€</option>
@@ -78,8 +78,8 @@ const Edit = ({address}) => {
              <Field as="select" name="artisticMovement" className="mt-1 block w-full">
               <option value="">Select Artistic Movement</option>
             </Field>
-            <ErrorMessage name="artisticMovement" component="div" className="text-red-500" />
-            <Field as="select" name="typeOfArt" className="mt-1 block w-full">
+            <ErrorMessage name="artMovement" component="div" className="text-red-500" />
+            <Field as="select" name="artType" className="mt-1 block w-full">
               <option value="">Select Type of Art</option>
               <option value="peinture">Painting</option>
               <option value="sculpture">Sculpture</option>
@@ -87,7 +87,7 @@ const Edit = ({address}) => {
               <option value="dessin">Drawing</option>
               <option value="autre">Other</option>
             </Field>
-            <ErrorMessage name="typeOfArt" component="div" className="text-red-500" />
+            <ErrorMessage name="ArtType" component="div" className="text-red-500" />
             <Field as="select" name="freeOrPaid" className="mt-1 block w-full">
               <option value="">Select Free or Paid</option>
               <option value="gratuit">Free</option>
@@ -111,7 +111,7 @@ const Edit = ({address}) => {
              <option value="bar à jus">Juice Bar</option>
              <option value="autre">Other</option>
               </Field>
-               {/* Bar Specific Fields */}
+               
              </>
         )
 
