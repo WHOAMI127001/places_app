@@ -31,7 +31,7 @@ const validationSchema = Yup.object({
   postalCode: Yup.number().required("Postal Code Required"),
   country: Yup.string().required("Country Required"),
   barType: Yup.string(), 
- type: Yup.string(),
+ 
 
 })
 // eslint-disable-next-line max-lines-per-function
