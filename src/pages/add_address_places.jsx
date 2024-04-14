@@ -22,6 +22,7 @@ const initialValues = {
     artType: "",
     barType: "",
     activeType:"",
+    
 
 }
 const validationSchema = Yup.object({
@@ -117,8 +118,8 @@ const renderDynamicFields = (type) => {
             <ErrorMessage name="artType" component="div" className="text-red-500" />
             <Field as="select" name="freeOrPaid" className="p-2 rounded border">
               <option value="">Select Free or Paid</option>
-              <option value="gratuit">Free</option>
-              <option value="payant">Paid</option>
+              <option value="Free">Free</option>
+              <option value="Paid">Paid</option>
             </Field>
             <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" />
           </>
@@ -159,7 +160,7 @@ const renderDynamicFields = (type) => {
    <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
     <option value="">Select Public or Private</option>
     <option value="public">Public</option>
-    <option value="privé">Private</option>
+    <option value="private">Private</option>
   </Field>
 </>
 

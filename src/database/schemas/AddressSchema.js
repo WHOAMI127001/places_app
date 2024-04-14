@@ -4,7 +4,7 @@ export const addressSchema = new Schema({
   type: {
     type: String,
     required:true,
-    enum: ["Restaurant", "Musée", "Bar", "Parc","bar"],
+    enum: ["Restaurant","restaurant", "musée", "Bar","Musee","musee","parc", "Parc","bar"],
   },
   name: {
     type: String,
@@ -44,7 +44,7 @@ export const addressSchema = new Schema({
     
     freeOrPaid: {
       type: String,
-      enum: ["Free", "Paid"],
+      enum: ["Free", "Paid" , "free", "paid"],
     },
     price: Number,
     // Champs spécifiques aux bars
@@ -58,7 +58,7 @@ export const addressSchema = new Schema({
     parkType: String,
     publicOrPrivate: {
       type: String,
-      enum: ["Public", "Private"],
+      enum: ["Public", "Private" , "public", "private"],
     },
     parkFreeOrPaid: {
       type: String,
