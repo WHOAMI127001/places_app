@@ -16,6 +16,7 @@ const AddressId = ({address}) =>(
       <h1>{address.street}</h1>
       <h1>{address.postalCode}</h1>
       <h1>{address.country}</h1>
+      
     </div>
 )
 

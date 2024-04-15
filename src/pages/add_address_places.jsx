@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
+import {useRouter}  from "next/router"
 const placeTypes = {
   restaurant: "Restaurant",
   musee: "Musée",
@@ -31,7 +32,7 @@ const validationSchema = Yup.object({
   city: Yup.string().required("City Required"),
   postalCode: Yup.number().required("Postal Code Required"),
   country: Yup.string().required("Country Required"),
-  barType: Yup.string(), 
+  
  
 
 })
@@ -40,6 +41,7 @@ const addAddressPlaces = (props) => {
   const { addresses: initialAddresses } = props
   const [activeType, setActiveType] = useState(null)
   const [addresses, setAddresses] = useState(initialAddresses)
+  const router = useRouter()
 const submit = async ({
   name,
   street,
@@ -63,6 +65,7 @@ const submit = async ({
       })
     setAddresses([newAddress, ...addresses])
     resetForm()
+    router.push("/")
 }
 // eslint-disable-next-line max-lines-per-function
 const renderDynamicFields = (type) => {
