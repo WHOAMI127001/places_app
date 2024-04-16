@@ -1,5 +1,4 @@
 /* eslint-disable max-lines */
-
 import React  from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
@@ -24,6 +23,7 @@ const Edit = ({address}) => {
   const handleSubmit = async (datas) => {
     const {_id, ...otherProps} = datas
     await axios.patch(`/api/addresses/${_id}`, { ...otherProps })
+    
     router.push(`/addresses/${_id}`)
   }
   const handledelete = async () => {
@@ -180,11 +180,10 @@ const Edit = ({address}) => {
                 <ErrorMessage name="country" component="div" className="text-red-500" />
 
                 {/* Champs dynamiques */}
-                {renderDynamicFields}
+                {renderDynamicFields()}
 
-    <Button type="submit" >Edit places 
-    
-    </Button>
+                
+                <Button onClick={handleSubmit} >Publish</Button>
 
       
       <Button  onClick={handledelete} >Delete</Button>
