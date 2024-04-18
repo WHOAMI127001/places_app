@@ -9,7 +9,11 @@ const HomePage = () => {
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "ascending" })
   const [filterType, setFilterType] = useState("")
   const [filterCuisine, setFilterCuisine] = useState("")
+  const [filterBarType, setFilterBarType] = useState("")  
+  const [filterArtType, setFilterArtType] = useState("")
+  const [filterParkType, setFilterParkType] = useState("")
 
+  
   useEffect(() => {
     const fetchAdresses = async () => {
       try {
@@ -26,7 +30,7 @@ const HomePage = () => {
 
   useEffect(() => {
     applyFilters()
-  }, [filterType, filterCuisine, adresses])
+  }, [filterType, filterCuisine, filterArtType,filterBarType,filterParkType,adresses,])
 
   const sortAdresses = (key) => {
     let direction = "ascending"
@@ -36,11 +40,15 @@ const HomePage = () => {
     }
 
     const sortedData = [...filteredAdresses].sort((a, b) => {
-      if (a[key] < b[key]) {return direction === "ascending" ? -1 : 1}
+      if (a[key] < b[key]) {
+        return direction === "ascending" ? -1 : 1
+      }
 
-      if (a[key] > b[key]) {return direction === "ascending" ? 1 : -1}
-      
-return 0
+      if (a[key] > b[key]) {
+        return direction === "ascending" ? 1 : -1
+      }
+
+      return 0
     })
 
     setFilteredAdresses(sortedData)
@@ -48,15 +56,31 @@ return 0
   }
   const applyFilters = () => {
     let filteredData = [...adresses]
-
+  
+    
     if (filterType) {
-      filteredData = filteredData.filter(adresse => adresse.type === filterType)
+      filteredData = filteredData.filter(adresse => adresse.type.toLowerCase() === filterType.toLowerCase())
     }
-
+  
+    
     if (filterType === "restaurant" && filterCuisine) {
-      filteredData = filteredData.filter(adresse => adresse.cuisine === filterCuisine)
+      filteredData = filteredData.filter(adresse => adresse.cuisineType && adresse.cuisineType.toLowerCase() === filterCuisine.toLowerCase())
     }
-
+  
+    
+    if (filterType === "bar" && filterBarType) {
+      filteredData = filteredData.filter(adresse => adresse.barType && adresse.barType.toLowerCase() === filterBarType.toLowerCase())
+    }
+  
+    
+    if (filterType === "musée" && filterArtType) {
+      filteredData = filteredData.filter(adresse => adresse.artType && adresse.artType.toLowerCase() === filterArtType.toLowerCase())
+    }
+  
+    if (filterType === "parc" && filterParkType) {
+      filteredData = filteredData.filter(adresse => adresse.parkType && adresse.parkType.toLowerCase() === filterParkType.toLowerCase())
+    }
+  
     setFilteredAdresses(filteredData)
   }
   const handleFilterTypeChange = (e) => {
@@ -67,6 +91,7 @@ return 0
       setFilterCuisine("")
     }
   }
+
 
   return (
     <div className="flex justify-center mt-28">
@@ -85,9 +110,63 @@ return 0
           <label htmlFor="filterCuisine" className="mr-2">Cuisine :</label>
           <select id="filterCuisine" value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)}>
             <option value="">Toutes</option>
-            <option value="italien">Italien</option>
+            <option value="indien">indien</option>
             <option value="français">Français</option>
-            </select>
+            <option value="japonais">Japanese</option>
+            <option value="mexicain">Mexican</option>
+            <option value="thai">Thai</option>
+            <option value="italien">Italian</option>
+            <option value="chinois">Chinese</option>
+            <option value="végétarien">Vegetarian</option>
+            <option value="autre">Other</option>
+          </select>
+        </div>
+        
+      )}
+
+      {filterType === "bar" && (
+        <div className="mb-4">
+          <label htmlFor="filterBarType" className="mr-2">Type de Bar :</label>
+          <select id="filterBarType" value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)}>
+            <option value="">Tous</option>
+            <option value="pub">Pub</option>
+          <option value="bar à vin">Wine Bar</option>
+          <option value="bar à cocktail">Cocktail Bar</option>
+          <option value="bar à bière">Beer Bar</option>
+          <option value="bar à jus">Juice Bar</option>
+          <option value="autre">Other</option>
+          </select>
+        </div>
+      )}
+      {filterType === "musée" && (
+        <div className="mb-4">
+          <label htmlFor="artMovement" className="mr-2">Type d'Art :</label>
+          <select id="artMovement" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
+            <option value="">Tous</option>
+            <option value="peinture">Painting</option>
+              <option value="sculpture">Sculpture</option>
+              <option value="photographie">Photography</option>
+              <option value="dessin">Drawing</option>
+              <option value="autre">Other</option>
+          </select>
+        </div>
+      )}
+      {filterType === "parc" && (
+        <div className="mb-4">
+          <label htmlFor="filterParkType" className="mr-2">Type de Parc :</label>
+          <select id="filterParkType" value={filterParkType} onChange={(e) => setFilterParkType(e.target.value)}>
+            <option value="">Tous</option>
+            <option value="">Select Park Type</option>
+    <option value="national">National</option>
+    <option value="régional">Regional</option>
+    <option value="urbain">Urban</option>
+    <option value="forestier">Forest</option>
+    <option value="botanique">Botanical</option>
+    <option value="zoologique">Zoological</option>
+    <option value="aquatique">Aquatic</option>
+    <option value="d'attraction">Amusement</option>
+    <option value="enfant">Children</option>
+          </select>
         </div>
       )}
       <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">

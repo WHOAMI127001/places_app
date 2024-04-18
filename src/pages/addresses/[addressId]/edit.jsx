@@ -186,13 +186,10 @@ const Edit = ({address}) => {
                 <Field type="text" name="country" className="p-2 rounded border" />
                 <ErrorMessage name="country" component="div" className="text-red-500" />
 
-                {/* Champs dynamiques */}
-                {renderDynamicFields()}
+              {renderDynamicFields()}
 
-                
-                <Button onClick={handleSubmit} >Publish</Button>
+              <Button onClick={handleSubmit}>Publish</Button>
 
-      
       <Button  onClick={handledelete} >Delete</Button>
   
       
@@ -205,5 +202,4 @@ const Edit = ({address}) => {
     </div>
   )
 }
-
 export default Edit

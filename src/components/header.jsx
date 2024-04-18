@@ -1,9 +1,10 @@
+/* eslint-disable no-duplicate-imports */
 import Link from "next/link"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/free-solid-svg-icons"
 import { faAdd } from "@fortawesome/free-solid-svg-icons"
 import {faBook} from "@fortawesome/free-solid-svg-icons"
-import Darkmode from '@/components/Darkmode'
+import Darkmode from"@/components/Darkmode"
 
 const Header = () => {
   return (
