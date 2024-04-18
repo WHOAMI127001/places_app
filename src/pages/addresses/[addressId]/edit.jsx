@@ -77,6 +77,11 @@ const Edit = ({address}) => {
           <>
              <Field as="select" name="artisticMovement" className="mt-1 block w-full">
               <option value="">Select Artistic Movement</option>
+              <option value="baroque">Baroque</option>
+              <option value="cubisme">Cubism</option>
+              <option value="impressionnisme">Impressionism</option>
+              <option value="renaissance">Renaissance</option>
+              <option value="romantisme">Romanticism</option>
             </Field>
             <ErrorMessage name="artMovement" component="div" className="text-red-500" />
             <Field as="select" name="artType" className="mt-1 block w-full">
@@ -144,6 +149,7 @@ const Edit = ({address}) => {
     }
   }
 
+  
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="bg-white shadow rounded-lg">
@@ -155,6 +161,7 @@ const Edit = ({address}) => {
           <div className="flex gap-4 mb-8">
             
           </div>
+   
           <Formik
             initialValues={
               address

@@ -1,65 +1,72 @@
+/* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import Link from "next/link"
 
 const HomePage = () => {
-  const [adresses, setAdresses] = useState([]);
-  const [filteredAdresses, setFilteredAdresses] = useState([]);
-  const [sortConfig, setSortConfig] = useState({ key: '', direction: "ascending" });
-  const [filterType, setFilterType] = useState('');
-  const [filterCuisine, setFilterCuisine] = useState('');
+  const [adresses, setAdresses] = useState([])
+  const [filteredAdresses, setFilteredAdresses] = useState([])
+  const [sortConfig, setSortConfig] = useState({ key: "", direction: "ascending" })
+  const [filterType, setFilterType] = useState("")
+  const [filterCuisine, setFilterCuisine] = useState("")
 
   useEffect(() => {
     const fetchAdresses = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/addresses");
-        setAdresses(data);
-        setFilteredAdresses(data);
+        const { data } = await axios.get("http://localhost:3000/api/addresses")
+        setAdresses(data)
+        setFilteredAdresses(data)
       } catch (error) {
-        console.error("Erreur lors de la récupération des adresses:", error);
+        console.error("Erreur lors de la récupération des adresses:", error)
       }
-    };
+    }
 
-    fetchAdresses();
-  }, []);
+    fetchAdresses()
+  }, [])
 
   useEffect(() => {
-    applyFilters();
-  }, [filterType, filterCuisine, adresses]);
+    applyFilters()
+  }, [filterType, filterCuisine, adresses])
 
   const sortAdresses = (key) => {
-    let direction = 'ascending';
-    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+    let direction = "ascending"
+
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending"
     }
+
     const sortedData = [...filteredAdresses].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1;
-      if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1;
-      return 0;
-    });
+      if (a[key] < b[key]) {return direction === "ascending" ? -1 : 1}
 
-    setFilteredAdresses(sortedData);
-    setSortConfig({ key, direction });
-  };
+      if (a[key] > b[key]) {return direction === "ascending" ? 1 : -1}
+      
+return 0
+    })
 
+    setFilteredAdresses(sortedData)
+    setSortConfig({ key, direction })
+  }
   const applyFilters = () => {
-    let filteredData = [...adresses];
-    if (filterType) {
-      filteredData = filteredData.filter(adresse => adresse.type === filterType);
-    }
-    if (filterType === 'restaurant' && filterCuisine) {
-      filteredData = filteredData.filter(adresse => adresse.cuisine === filterCuisine);
-    }
-    setFilteredAdresses(filteredData);
-  };
+    let filteredData = [...adresses]
 
-  const handleFilterTypeChange = (e) => {
-    const selectedType = e.target.value;
-    setFilterType(selectedType);
-    if (selectedType !== 'restaurant') {
-      setFilterCuisine('');
+    if (filterType) {
+      filteredData = filteredData.filter(adresse => adresse.type === filterType)
     }
-  };
+
+    if (filterType === "restaurant" && filterCuisine) {
+      filteredData = filteredData.filter(adresse => adresse.cuisine === filterCuisine)
+    }
+
+    setFilteredAdresses(filteredData)
+  }
+  const handleFilterTypeChange = (e) => {
+    const selectedType = e.target.value
+    setFilterType(selectedType)
+
+    if (selectedType !== "restaurant") {
+      setFilterCuisine("")
+    }
+  }
 
   return (
     <div className="flex justify-center mt-28">
@@ -69,29 +76,29 @@ const HomePage = () => {
           <option value="">Tous</option>
           <option value="restaurant">Restaurant</option>
           <option value="bar">Bar</option>
-          {/* Ajoutez d'autres options de type si nécessaire */}
+          <option value="musee">Musée</option>
+          <option value="parc">Parc</option>
         </select>
       </div>
-      {filterType === 'restaurant' && (
+      {filterType === "restaurant" && (
         <div className="mb-4">
           <label htmlFor="filterCuisine" className="mr-2">Cuisine :</label>
           <select id="filterCuisine" value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)}>
             <option value="">Toutes</option>
             <option value="italien">Italien</option>
             <option value="français">Français</option>
-            {/* Ajoutez d'autres options de cuisine si nécessaire */}
-          </select>
+            </select>
         </div>
       )}
       <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
-            <th onClick={() => sortAdresses('street')}>Rue</th>
-            <th onClick={() => sortAdresses('name')}>Nom</th>
-            <th onClick={() => sortAdresses('city')}>Ville</th>
-            <th onClick={() => sortAdresses('country')}>Pays</th>
-            <th onClick={() => sortAdresses('postalCode')}>Code Postal</th>
-            <th onClick={() => sortAdresses('type')}>Type</th>
+            <th onClick={() => sortAdresses("street")}>Rue</th>
+            <th onClick={() => sortAdresses("name")}>Nom</th>
+            <th onClick={() => sortAdresses("city")}>Ville</th>
+            <th onClick={() => sortAdresses("country")}>Pays</th>
+            <th onClick={() => sortAdresses("postalCode")}>Code Postal</th>
+            <th onClick={() => sortAdresses("type")}>Type</th>
           </tr>
         </thead>
         <tbody>

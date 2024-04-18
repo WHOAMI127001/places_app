@@ -108,6 +108,11 @@ const renderDynamicFields = (type) => {
           <>
          <Field as="select" name="artMovement" className="p-2 rounded border">
               <option value="">Select Artistic Movement</option>
+              <option value="baroque">Baroque</option>
+              <option value="cubisme">Cubism</option>
+              <option value="impressionnisme">Impressionism</option>
+              <option value="renaissance">Renaissance</option>
+              <option value="romantisme">Romanticism</option>
             </Field>
             <ErrorMessage name="artMovement" component="div" className="text-red-500" />
             <Field as="select" name="artType" className="p-2 rounded border">
