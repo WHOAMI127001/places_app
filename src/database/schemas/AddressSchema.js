@@ -4,7 +4,7 @@ export const addressSchema = new Schema({
   type: {
     type: String,
     required:true,
-    enum: ["Restaurant","restaurant", "musée", "Bar","Musee","musee","parc", "Parc","bar"],
+    enum: ["Restaurant","Bar","Musée","Parc"],
   },
   name: {
     type: String,
@@ -41,10 +41,10 @@ export const addressSchema = new Schema({
     // Champs spécifiques aux musées
     artMovement: String,
     artType: String,
-    
-    freeOrPaid: {
+
+    museumFreeOrPaid: {
       type: String,
-      enum: ["Free", "Paid" , "free", "paid"],
+      enum: ["Free", "Paid"]
     },
     price: Number,
     // Champs spécifiques aux bars
@@ -55,15 +55,15 @@ export const addressSchema = new Schema({
       max: 5,
     },
     // Champs spécifiques aux parcs
-    parkType: String,
+    parcType: String,
     publicOrPrivate: {
       type: String,
-      enum: ["Public", "Private" , "public", "private"],
+      enum: ["Public", "Private"],
     },
-    parkFreeOrPaid: {
+    parcFreeOrPaid: {
       type: String,
       enum: ["Free", "Paid"],
     },
-    parkPrice: Number,
-   
+    parcPrice: Number,
+
   })

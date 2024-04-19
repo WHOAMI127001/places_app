@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React  from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import * as Yup from "yup"
 import axios from "axios"
 import { useRouter } from "next/router"
 import { Button } from "@/components/Button"
@@ -30,13 +29,6 @@ const Edit = ({address}) => {
     await axios.delete(`/api/addresses/${address._id}`)
     router.push("/")
   }
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    address: Yup.string().required("Address is required"),
-    city: Yup.string().required("City is required"),
-    postalCode: Yup.string().required("Postal Code is required"),
-    country: Yup.string().required("Country is required"),
-  })
   // eslint-disable-next-line max-lines-per-function
   const renderDynamicFields = () => {
     switch (address.type) {
@@ -166,8 +158,7 @@ const Edit = ({address}) => {
             initialValues={
               address
               }
-            validationSchema={validationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={ handleSubmit}
 
           >
             {() => (
@@ -189,7 +180,7 @@ const Edit = ({address}) => {
 
               {renderDynamicFields()}
 
-              <Button onClick={handleSubmit}>Publish</Button>
+              <Button  type="submit">Submit</Button>
 
       <Button  onClick={handledelete} >Delete</Button>
   
