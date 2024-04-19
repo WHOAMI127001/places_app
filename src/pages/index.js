@@ -16,14 +16,10 @@ const HomePage = () => {
   
   useEffect(() => {
     const fetchAdresses = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:3000/api/addresses")
+       const { data } = await axios.get("http://localhost:3000/api/addresses")
         setAdresses(data)
         setFilteredAdresses(data)
-      } catch (error) {
-        console.error("Erreur lors de la récupération des adresses:", error)
-      }
-    }
+         }
 
     fetchAdresses()
   }, [])
