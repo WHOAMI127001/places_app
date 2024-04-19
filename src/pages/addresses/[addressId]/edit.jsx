@@ -32,19 +32,19 @@ const Edit = ({address}) => {
   // eslint-disable-next-line max-lines-per-function
   const renderDynamicFields = () => {
     switch (address.type) {
-      case "restaurant":
+      case "Restaurant":
         return (<>
           <Field as="select" name="cuisineType" className="p-2 rounded border">
-             <option value="">Select Cuisine Type</option>
-             <option value="italien">Italian</option>
-             <option value="français">French</option>
-             <option value="chinois">Chinese</option>
-             <option value="indien">Indian</option>
-             <option value="japonais">Japanese</option>
-             <option value="mexicain">Mexican</option>
-             <option value="thai">Thai</option>
-             <option value="végétarien">Vegetarian</option>
-             <option value="autre">Other</option>
+          <option value="">Select Cuisine Type</option>
+            <option value="Italian">Italian</option>
+            <option value="French">French</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Indian">Indian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Thai">Thai</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Other">Other</option>
            </Field>
            <ErrorMessage name="starRating" component="div" className="text-red-500" />
            <Field as="select" name="stars" className="p-2 rounded border">
@@ -54,8 +54,8 @@ const Edit = ({address}) => {
              <option value="3">3</option>
            
            </Field>
-           <ErrorMessage name="CuisineAveragePrice" component="div" className="text-red-500" />
-           <Field as="select" name="CuisineAveragePrice" className="p-2 rounded border">
+           <ErrorMessage name="cuisineAveragePrice" component="div" className="text-red-500" />
+           <Field as="select" name="cuisineAveragePrice" className="p-2 rounded border">
              <option value="">Select Average Price</option>
              <option value="€">€</option>
              <option value="€€">€€</option>
@@ -64,74 +64,76 @@ const Edit = ({address}) => {
            </>
            )
 
-      case "musee":
+      case "Musée":
         return (
           <>
              <Field as="select" name="artisticMovement" className="mt-1 block w-full">
-              <option value="">Select Artistic Movement</option>
-              <option value="baroque">Baroque</option>
-              <option value="cubisme">Cubism</option>
-              <option value="impressionnisme">Impressionism</option>
-              <option value="renaissance">Renaissance</option>
-              <option value="romantisme">Romanticism</option>
+             <option value="">Select Artistic Movement</option>
+              <option value="Renaissance">Renaissance</option>
+              <option value="Baroque">Baroque</option>
+              <option value="Surréalism">Surréalism</option>
+              <option value="Cubism">Cubism</option>
+              <option value="Impressionism">Impressionism</option>
+              <option value="Romanticism">Romanticism</option>
             </Field>
             <ErrorMessage name="artMovement" component="div" className="text-red-500" />
             <Field as="select" name="artType" className="mt-1 block w-full">
               <option value="">Select Type of Art</option>
-              <option value="peinture">Painting</option>
-              <option value="sculpture">Sculpture</option>
-              <option value="photographie">Photography</option>
-              <option value="dessin">Drawing</option>
-              <option value="autre">Other</option>
+              <option value="">Select Type of Art</option>
+              <option value="Painting">Painting</option>
+              <option value="Sculpture">Sculpture</option>
+              <option value="Photography">Photography</option>
+              <option value="Drawing">Drawing</option>
+              <option value="Other">Other</option>
             </Field>
             <ErrorMessage name="ArtType" component="div" className="text-red-500" />
             <Field as="select" name="freeOrPaid" className="mt-1 block w-full">
               <option value="">Select Free or Paid</option>
-              <option value="gratuit">Free</option>
-              <option value="payant">Paid</option>
+              <option value="Free">Free</option>
+              <option value="Paid">Paid</option>
             </Field>
             <ErrorMessage name="freeOrPaid" component="div" className="text-red-500" /> 
 
           </>
         )
 
-      case "bar":
+      case "Bar":
         return (
           <>
           <Field as="select" name="barType" className="p-2 rounded border">
              <ErrorMessage name="barType" component="div" className="text-red-500" />
-            <option value="">Select Bar Type</option>
-             <option value="pub">Pub</option>
-             <option value="bar à vin">Wine Bar</option>
-             <option value="bar à cocktail">Cocktail Bar</option>
-             <option value="bar à bière">Beer Bar</option>
-             <option value="bar à jus">Juice Bar</option>
-             <option value="autre">Other</option>
+             <option value="">Select Bar Type</option>
+          <option value="Pub">Pub</option>
+          <option value="wine Bar">Wine Bar</option>
+          <option value="Cocktail Bar">Cocktail Bar</option>
+          <option value="Beer Bar">Beer Bar</option>
+          <option value="Juice Bar">Juice Bar</option>
+          <option value="Other">Other</option>
               </Field>
                
              </>
         )
 
-      case "parc":
+      case "Parc":
         return (
           <>
           <Field as="select" name="parkType" className="p-2 rounded border">
-    <option value="">Select Park Type</option>
-    <option value="national">National</option>
-    <option value="régional">Regional</option>
-    <option value="urbain">Urban</option>
-    <option value="forestier">Forest</option>
-    <option value="botanique">Botanical</option>
-    <option value="zoologique">Zoological</option>
-    <option value="aquatique">Aquatic</option>
-    <option value="d'attraction">Amusement</option>
-    <option value="enfant">Children</option>
+          <option value="">Select Parc Type</option>
+    <option value="National">National</option>
+    <option value="Regional">Regional</option>
+    <option value="Urban">Urban</option>
+    <option value="Forest">Forest</option>
+    <option value="Botanical">Botanical</option>
+    <option value="Zoological">Zoological</option>
+    <option value="Aquatic">Aquatic</option>
+    <option value="Amusement">Amusement</option>
+    <option value="Children">Children</option>
   </Field>
   <ErrorMessage name="parkType" component="div" className="text-red-500" />
    <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
     <option value="">Select Public or Private</option>
-    <option value="public">Public</option>
-    <option value="privé">Private</option>
+    <option value="Public">Public</option>
+    <option value="Private">Private</option>
   </Field>
 </>
         )

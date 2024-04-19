@@ -138,11 +138,11 @@ const renderDynamicFields = (type) => {
           </>
         )
 
-      case "parc":
+      case "Parc":
         return (
           <>
           <Field as="select" name="parcType" className="p-2 rounded border">
-    <option value="">Select Park Type</option>
+    <option value="">Select Parc Type</option>
     <option value="National">National</option>
     <option value="Regional">Regional</option>
     <option value="Urban">Urban</option>
@@ -156,8 +156,8 @@ const renderDynamicFields = (type) => {
   <ErrorMessage name="parcType" component="div" className="text-red-500" />
    <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
     <option value="">Select Public or Private</option>
-    <option value="public">Public</option>
-    <option value="private">Private</option>
+    <option value="Public">Public</option>
+    <option value="Private">Private</option>
   </Field>
 </>
 

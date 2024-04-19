@@ -11,7 +11,7 @@ const HomePage = () => {
   const [filterCuisine, setFilterCuisine] = useState("")
   const [filterBarType, setFilterBarType] = useState("")  
   const [filterArtType, setFilterArtType] = useState("")
-  const [filterParkType, setFilterParkType] = useState("")
+  const [filterParkType, setFilterParcType] = useState("")
 
   
   useEffect(() => {
@@ -73,12 +73,12 @@ const HomePage = () => {
     }
   
     
-    if (filterType === "musée" && filterArtType) {
+    if (filterType === "Musée" && filterArtType) {
       filteredData = filteredData.filter(adresse => adresse.artType && adresse.artType.toLowerCase() === filterArtType.toLowerCase())
     }
   
     if (filterType === "parc" && filterParkType) {
-      filteredData = filteredData.filter(adresse => adresse.parkType && adresse.parkType.toLowerCase() === filterParkType.toLowerCase())
+      filteredData = filteredData.filter(adresse => adresse.parcType && adresse.parcType.toLowerCase() === filterParkType.toLowerCase())
     }
   
     setFilteredAdresses(filteredData)
@@ -101,7 +101,7 @@ const HomePage = () => {
           <option value="">Tous</option>
           <option value="restaurant">Restaurant</option>
           <option value="bar">Bar</option>
-          <option value="musee">Musée</option>
+          <option value="Musée">Musée</option>
           <option value="parc">Parc</option>
         </select>
       </div>
@@ -129,43 +129,43 @@ const HomePage = () => {
           <label htmlFor="filterBarType" className="mr-2">Type de Bar :</label>
           <select id="filterBarType" value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)}>
             <option value="">Tous</option>
-            <option value="pub">Pub</option>
-          <option value="bar à vin">Wine Bar</option>
-          <option value="bar à cocktail">Cocktail Bar</option>
-          <option value="bar à bière">Beer Bar</option>
-          <option value="bar à jus">Juice Bar</option>
-          <option value="autre">Other</option>
+            <option value="Pub">Pub</option>
+          <option value="wine Bar">Wine Bar</option>
+          <option value="Cocktail Bar">Cocktail Bar</option>
+          <option value="Beer Bar">Beer Bar</option>
+          <option value="Juice Bar">Juice Bar</option>
           </select>
         </div>
       )}
-      {filterType === "musee" && (
+      {filterType === "Musée" && (
         <div className="mb-4">
-          <label htmlFor="artMovement" className="mr-2">Type d'Art :</label>
-          <select id="artMovement" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
-            <option value="">Tous</option>
-            <option value="peinture">Painting</option>
-              <option value="sculpture">Sculpture</option>
-              <option value="photographie">Photography</option>
-              <option value="dessin">Drawing</option>
-              <option value="autre">Other</option>
-          </select>
+          <label htmlFor="artType" className="mr-2">Type of Art :</label>
+          <select id="artType" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
+            <option value="">All</option>
+            <option value="Renaissance">Renaissance</option>
+              <option value="Baroque">Baroque</option>
+              <option value="Surréalism">Surréalism</option>
+              <option value="Cubism">Cubism</option>
+              <option value="Impressionism">Impressionism</option>
+              <option value="Romanticism">Romanticism</option>
+           </select>   
         </div>
       )}
+
       {filterType === "parc" && (
         <div className="mb-4">
-          <label htmlFor="filterParkType" className="mr-2">Type de Parc :</label>
-          <select id="filterParkType" value={filterParkType} onChange={(e) => setFilterParkType(e.target.value)}>
-            <option value="">Tous</option>
-            <option value="">Select Park Type</option>
-    <option value="national">National</option>
-    <option value="régional">Regional</option>
-    <option value="urbain">Urban</option>
-    <option value="forestier">Forest</option>
-    <option value="botanique">Botanical</option>
-    <option value="zoologique">Zoological</option>
-    <option value="aquatique">Aquatic</option>
-    <option value="d'attraction">Amusement</option>
-    <option value="enfant">Children</option>
+          <label htmlFor="filterParcType" className="mr-2">Type of Parc :</label>
+          <select id="filterParcType" value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)}>
+            <option value="">All</option>
+            <option value="National">National</option>
+           <option value="Regional">Regional</option>
+          <option value="Urban">Urban</option>
+       <option value="Forest">Forest</option>
+    <option value="Botanical">Botanical</option>
+    <option value="Zoological">Zoological</option>
+    <option value="Aquatic">Aquatic</option>
+    <option value="Amusement">Amusement</option>
+    <option value="Children">Children</option>
           </select>
         </div>
       )}

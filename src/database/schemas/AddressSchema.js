@@ -30,11 +30,10 @@ export const addressSchema = new Schema({
     cuisineType: String,
     starRating: {
       type: Number,
-      min: 1,
-      max: 3,
+    
     },
     cuisineAveragePrice: {
-      type: Number,
+      type: String,
       min: 1,
       max: 5,
     },
