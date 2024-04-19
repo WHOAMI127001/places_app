@@ -26,7 +26,7 @@ const Edit = ({address}) => {
     
     router.push(`/addresses/${_id}`)
   }
-  const handledelete = async () => {
+     const handledelete = async () => {
     await axios.delete(`/api/addresses/${address._id}`)
     router.push("/")
   }
@@ -167,7 +167,8 @@ const Edit = ({address}) => {
               address
               }
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values) => handleSubmit(values)}
+
           >
             {() => (
               <Form className="flex flex-col space-y-4">

@@ -65,4 +65,5 @@ export const addressSchema = new Schema({
       enum: ["Free", "Paid"],
     },
     parkPrice: Number,
+   
   })

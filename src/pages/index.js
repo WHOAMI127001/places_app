@@ -138,7 +138,7 @@ const HomePage = () => {
           </select>
         </div>
       )}
-      {filterType === "musée" && (
+      {filterType === "musee" && (
         <div className="mb-4">
           <label htmlFor="artMovement" className="mr-2">Type d'Art :</label>
           <select id="artMovement" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
