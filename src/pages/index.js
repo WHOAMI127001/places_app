@@ -11,6 +11,7 @@ const HomePage = () => {
   const [filterCuisine, setFilterCuisine] = useState("")
   const [filterBarType, setFilterBarType] = useState("")  
   const [filterArtType, setFilterArtType] = useState("")
+  const [filterArtMovement, setFilterArtMovement] = useState("")
   const [filterParkType, setFilterParcType] = useState("")
 
   
@@ -26,7 +27,7 @@ const HomePage = () => {
 
   useEffect(() => {
     applyFilters()
-  }, [filterType, filterCuisine, filterArtType,filterBarType,filterParkType,adresses,])
+  }, [filterType, filterCuisine, filterArtType, filterArtMovement,filterBarType,filterParkType,adresses,])
 
   const sortAdresses = (key) => {
     let direction = "ascending"
@@ -72,6 +73,10 @@ const HomePage = () => {
     if (filterType === "Musée" && filterArtType) {
       filteredData = filteredData.filter(adresse => adresse.artType && adresse.artType.toLowerCase() === filterArtType.toLowerCase())
     }
+
+    if (filterArtMovement && filterType === "Musée") {
+      filteredData = filteredData.filter((adresse) => adresse.artMovement && adresse.artMovement.toLowerCase() === filterArtMovement.toLowerCase());
+    }
   
     if (filterType === "parc" && filterParkType) {
       filteredData = filteredData.filter(adresse => adresse.parcType && adresse.parcType.toLowerCase() === filterParkType.toLowerCase())
@@ -106,15 +111,15 @@ const HomePage = () => {
           <label htmlFor="filterCuisine" className="mr-2">Cuisine :</label>
           <select id="filterCuisine" value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)}>
             <option value="">Toutes</option>
-            <option value="indien">indien</option>
-            <option value="français">Français</option>
-            <option value="japonais">Japanese</option>
-            <option value="mexicain">Mexican</option>
-            <option value="thai">Thai</option>
-            <option value="italien">Italian</option>
-            <option value="chinois">Chinese</option>
-            <option value="végétarien">Vegetarian</option>
-            <option value="autre">Other</option>
+            <option value="Italian">Italian</option>
+            <option value="French">French</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Indian">Indian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Thai">Thai</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         
@@ -124,9 +129,9 @@ const HomePage = () => {
         <div className="mb-4">
           <label htmlFor="filterBarType" className="mr-2">Type de Bar :</label>
           <select id="filterBarType" value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)}>
-            <option value="">Tous</option>
+            <option value="">All</option>
             <option value="Pub">Pub</option>
-          <option value="wine Bar">Wine Bar</option>
+          <option value="Wine Bar">Wine Bar</option>
           <option value="Cocktail Bar">Cocktail Bar</option>
           <option value="Beer Bar">Beer Bar</option>
           <option value="Juice Bar">Juice Bar</option>
@@ -138,14 +143,29 @@ const HomePage = () => {
           <label htmlFor="artType" className="mr-2">Type of Art :</label>
           <select id="artType" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
             <option value="">All</option>
+            <option value="">Select Type of Art</option>
+              <option value="Painting">Painting</option>
+              <option value="Sculpture">Sculpture</option>
+              <option value="Photography">Photography</option>
+              <option value="Drawing">Drawing</option>
+              <option value="Other">Other</option>
+           </select>   
+          
+        </div>
+      )}
+      {filterType === "Musée" && (
+       <div className="mb-4">
+          <label htmlFor="artMovement" className="mr-2">Artistic Movement :</label>
+          <select id="artMovement" value={filterArtType} onChange={(e) => setFilterArtMovement(e.target.value)}>
+            <option value="">All</option>
             <option value="Renaissance">Renaissance</option>
               <option value="Baroque">Baroque</option>
               <option value="Surréalism">Surréalism</option>
               <option value="Cubism">Cubism</option>
               <option value="Impressionism">Impressionism</option>
               <option value="Romanticism">Romanticism</option>
-           </select>   
-        </div>
+          </select>
+          </div>
       )}
 
       {filterType === "parc" && (
