@@ -75,7 +75,7 @@ const HomePage = () => {
     }
 
     if (filterArtMovement && filterType === "Musée") {
-      filteredData = filteredData.filter((adresse) => adresse.artMovement && adresse.artMovement.toLowerCase() === filterArtMovement.toLowerCase());
+      filteredData = filteredData.filter((adresse) => adresse.artMovement && adresse.artMovement.toLowerCase() === filterArtMovement.toLowerCase())
     }
   
     if (filterType === "parc" && filterParkType) {

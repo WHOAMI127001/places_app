@@ -64,11 +64,8 @@ const renderDynamicFields = (type) => {
             <option value="">Select Cuisine Type</option>
             <option value="Italian">Italian</option>
             <option value="French">French</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Indian">Indian</option>
+           <option value="Indian">Indian</option>
             <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Thai">Thai</option>
             <option value="Vegetarian">Vegetarian</option>
             <option value="Other">Other</option>
           </Field>
