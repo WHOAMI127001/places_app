@@ -6,8 +6,7 @@ import { faAdd } from "@fortawesome/free-solid-svg-icons"
 import {faBook} from "@fortawesome/free-solid-svg-icons"
 import Darkmode from"@/components/Darkmode"
 
-const Header = () => {
-  return (
+const Header = () => (
     <header className="fixed top-0 left-0 justify-between items-center bg-slate-500 w-full h-20">
       <div className="fixed top-3 left-8 sm:left-14 min-w-12 "> 
           <FontAwesomeIcon  icon={faBook} size="2x" />
@@ -27,6 +26,5 @@ const Header = () => {
       </div>
     </header>
   )
-}
 
 export default Header

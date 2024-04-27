@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from "react"
 import axios from "axios"
@@ -117,7 +118,6 @@ const HomePage = () => {
             <option value="Indian">Indian</option>
             <option value="Japanese">Japanese</option>
             <option value="Mexican">Mexican</option>
-            <option value="Thai">Thai</option>
             <option value="Vegetarian">Vegetarian</option>
             <option value="Other">Other</option>
           </select>
