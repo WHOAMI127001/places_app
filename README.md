@@ -44,7 +44,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 add this path on compass mongodb
 = mongodb://127.0.0.1:27017/Places_map
 
-## To use our App please donwload the following Packages ##
+## To use our App please download the following Packages ##
 Axios
 Fontawesome 
 Yup
