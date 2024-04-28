@@ -42,5 +42,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Add Env.Local to launch our application ##
 add this path on compass mongodb
+= mongodb://127.0.0.1:27017/Places_map
+
+## To use our App please donwload the following Packages ##
+Axios
+Fontawesome 
+Yup
+Next Router
 
 
