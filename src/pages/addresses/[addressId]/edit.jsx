@@ -5,7 +5,6 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import { Button } from "@/components/Button"
  
-
 export const getServerSideProps = async ({ params: { addressId } }) => {
     const { data: address } = await axios(
       `http://localhost:3000/api/addresses/${addressId}`,
@@ -42,7 +41,6 @@ const Edit = ({address}) => {
             <option value="Indian">Indian</option>
             <option value="Japanese">Japanese</option>
             <option value="Mexican">Mexican</option>
-            <option value="Thai">Thai</option>
             <option value="Vegetarian">Vegetarian</option>
             <option value="Other">Other</option>
            </Field>
@@ -143,7 +141,6 @@ const Edit = ({address}) => {
     }
   }
 
-  
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="bg-white shadow rounded-lg">
@@ -186,9 +183,7 @@ const Edit = ({address}) => {
 
       <Button  onClick={handledelete} >Delete</Button>
   
-      
-              
-              </Form>
+       </Form>
             )}
 </Formik>
         </div>

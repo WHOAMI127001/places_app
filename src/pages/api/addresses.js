@@ -1,10 +1,7 @@
-/* eslint-disable eol-last */
-/* eslint-disable quotes */
 import { createRoute } from "@/api/createRoute"
 import { AddressModel } from "@/database/models/AddressModel"
 
 const handler = createRoute(async (req, res) => {
-  // GET /addresses -> read resource collection
   if (req.method === "GET") {
     const addresses = await AddressModel.find({})
     res.send(addresses)
