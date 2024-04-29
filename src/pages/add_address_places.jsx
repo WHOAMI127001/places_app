@@ -135,5 +135,4 @@ default:
     </div>
   )
 }
-
 export default addAddressPlaces
