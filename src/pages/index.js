@@ -3,6 +3,11 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import Link from "next/link"
+import FilterCuisine from "@/components/FilterCuisine"
+import FilterBarType from "@/components/FilterBarType"
+import FilterArtMovement from "@/components/FilterArtMovement"
+import FilterArtType from "@/components/FilterArtType"
+import FilterParkType from "@/components/FilterParkType"
 
 const HomePage = () => {
   const [adresses, setAdresses] = useState([])
@@ -106,85 +111,12 @@ useEffect(() => {
           <option value="parc">Parc</option>
         </select>
       </div>
-      {filterType === "restaurant" && (
-        <div className="mb-4">
-          <label htmlFor="filterCuisine" className="mr-2">Cuisine :</label>
-          <select id="filterCuisine" value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)}>
-            <option value="">Toutes</option>
-            <option value="Italian">Italian</option>
-            <option value="French">French</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Indian">Indian</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        
-      )}
-
-      {filterType === "bar" && (
-        <div className="mb-4">
-          <label htmlFor="filterBarType" className="mr-2">Type de Bar :</label>
-          <select id="filterBarType" value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)}>
-            <option value="">All</option>
-            <option value="Pub">Pub</option>
-          <option value="Wine Bar">Wine Bar</option>
-          <option value="Cocktail Bar">Cocktail Bar</option>
-          <option value="Beer Bar">Beer Bar</option>
-          <option value="Juice Bar">Juice Bar</option>
-          </select>
-        </div>
-      )}
-      {filterType === "Musée" && (
-        <div className="mb-4">
-          <label htmlFor="artType" className="mr-2">Type of Art :</label>
-          <select id="artType" value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)}>
-            <option value="">All</option>
-            <option value="">Select Type of Art</option>
-              <option value="Painting">Painting</option>
-              <option value="Sculpture">Sculpture</option>
-              <option value="Photography">Photography</option>
-              <option value="Drawing">Drawing</option>
-              <option value="Other">Other</option>
-           </select>   
-          
-        </div>
-      )}
-      {filterType === "Musée" && (
-       <div className="mb-4">
-          <label htmlFor="artMovement" className="mr-2">Artistic Movement :</label>
-          <select id="artMovement" value={filterArtType} onChange={(e) => setFilterArtMovement(e.target.value)}>
-            <option value="">All</option>
-            <option value="Renaissance">Renaissance</option>
-              <option value="Baroque">Baroque</option>
-              <option value="Surréalism">Surréalism</option>
-              <option value="Cubism">Cubism</option>
-              <option value="Impressionism">Impressionism</option>
-              <option value="Romanticism">Romanticism</option>
-          </select>
-          </div>
-      )}
-
-      {filterType === "parc" && (
-        <div className="mb-4">
-          <label htmlFor="filterParcType" className="mr-2">Type of Parc :</label>
-          <select id="filterParcType" value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)}>
-            <option value="">All</option>
-            <option value="National">National</option>
-           <option value="Regional">Regional</option>
-          <option value="Urban">Urban</option>
-       <option value="Forest">Forest</option>
-    <option value="Botanical">Botanical</option>
-    <option value="Zoological">Zoological</option>
-    <option value="Aquatic">Aquatic</option>
-    <option value="Amusement">Amusement</option>
-    <option value="Children">Children</option>
-          </select>
-          
-        </div>
-      )}
+      {filterType === "restaurant" && <FilterCuisine value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)} />}
+      {filterType === "bar" && <FilterBarType value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)} />}
+      {filterType === "Musée" && <FilterArtType value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)} />}
+      {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />}
+      {filterType === "parc" && <FilterParkType value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)} />}
+      
       <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
