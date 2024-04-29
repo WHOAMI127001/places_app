@@ -19,7 +19,6 @@ export const getServerSideProps = async ({ params: { addressId } }) => {
     }
   }
 // eslint-disable-next-line max-lines-per-function
-// eslint-disable-next-line max-lines-per-function
 const Edit = ({address}) => {
   const router = useRouter()
   const handleSubmit = async (datas) => {
