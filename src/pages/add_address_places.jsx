@@ -4,6 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import {useRouter}  from "next/router"
+import Resto from "@/components/resto"
+import Bar from "@/components/Bar"
+import Park from "@/components/park"
+import Museum from "@/components/museum"
 const placeTypes = {
   Restaurant: "Restaurant",
   Musée: "Musée",
@@ -59,108 +63,18 @@ const submit = async ({
 const renderDynamicFields = (type) => {
     switch (type) {
       case "Restaurant":
-        return (<>
-         <Field as="select" name="cuisineType" className="p-2 rounded border">
-            <option value="">Select Cuisine Type</option>
-            <option value="Italian">Italian</option>
-            <option value="French">French</option>
-           <option value="Indian">Indian</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Other">Other</option>
-          </Field>
-          <ErrorMessage name="starRating" component="div" className="text-red-500" />
-          <Field as="select" name="starRating" className="p-2 rounded border">
-            <option value="">Select Stars</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          
-          </Field>
-          <ErrorMessage name="cuisineAveragePrice" component="div" className="text-red-500" />
-          <Field as="select" name="cuisineAveragePrice" className="p-2 rounded border">
-            <option value="">Select Average Price</option>
-            <option value="€">€</option>
-            <option value="€€">€€</option>
-            <option value="€€€">€€€</option>
-          </Field>
-          </>
-          )
+        return <Resto/>
+    
+         case "Musée":
+        return  <Museum/>
 
-      case "Musée":
-        return (
-          <>
-         <Field as="select" name="artMovement" className="p-2 rounded border">
-              <option value="">Select Artistic Movement</option>
-              <option value="Renaissance">Renaissance</option>
-              <option value="Baroque">Baroque</option>
-              <option value="Surréalism">Surréalism</option>
-              <option value="Cubism">Cubism</option>
-              <option value="Impressionism">Impressionism</option>
-              <option value="Romanticism">Romanticism</option>
-            </Field>
-            <ErrorMessage name="artMovement" component="div" className="text-red-500" />
-            <Field as="select" name="artType" className="p-2 rounded border">
-              <option value="">Select Type of Art</option>
-              <option value="Painting">Painting</option>
-              <option value="Sculpture">Sculpture</option>
-              <option value="Photography">Photography</option>
-              <option value="Drawing">Drawing</option>
-              <option value="Other">Other</option>
-            </Field>
-            <ErrorMessage name="artType" component="div" className="text-red-500" />
-            <Field as="select" name="museumFreeOrPaid" className="p-2 rounded border">
-              <option value="">Select Free or Paid</option>
-              <option value="Free">Free</option>
-              <option value="Paid">Paid</option>
-            </Field>
-            <ErrorMessage name="museumFreeOrPaid" component="div" className="text-red-500" />
-          </>
-        )
-
-      case "Bar":
-        return (
-          <>
-       <Field as="select" name="barType" className="p-2 rounded border">
-         <option value="">Select Bar Type</option>
-          <option value="Pub">Pub</option>
-          <option value="wine Bar">Wine Bar</option>
-          <option value="Cocktail Bar">Cocktail Bar</option>
-          <option value="Beer Bar">Beer Bar</option>
-          <option value="Juice Bar">Juice Bar</option>
-          <option value="Other">Other</option>
-           </Field>
-           <ErrorMessage name="barType" component="div" className="text-red-500" />
-          </>
-        )
+   case "Bar":
+        return  <Bar/>
 
       case "Parc":
-        return (
-          <>
-          <Field as="select" name="parcType" className="p-2 rounded border">
-    <option value="">Select Parc Type</option>
-    <option value="National">National</option>
-    <option value="Regional">Regional</option>
-    <option value="Urban">Urban</option>
-    <option value="Forest">Forest</option>
-    <option value="Botanical">Botanical</option>
-    <option value="Zoological">Zoological</option>
-    <option value="Aquatic">Aquatic</option>
-    <option value="Amusement">Amusement</option>
-    <option value="Children">Children</option>
-  </Field>
-  <ErrorMessage name="parcType" component="div" className="text-red-500" />
-   <Field as="select" name="publicOrPrivate" className="p-2 rounded border">
-    <option value="">Select Public or Private</option>
-    <option value="Public">Public</option>
-    <option value="Private">Private</option>
-  </Field>
-</>
-
-)
-
-      default:
+        return  <Park/>
+    
+default:
         return null
     }
   }
