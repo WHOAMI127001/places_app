@@ -1,7 +1,7 @@
 import React from "react"
 const FilterParkType= ({ value, onChange }) => (
     <div className="mb-4">
-      <label htmlFor="filterParkType" className="mr-2">Cuisine :</label>
+      <label htmlFor="filterParkType" className="mr-2">Park Type :</label>
       <select id="filterParkType" value={value} onChange={onChange}>
       <option value="">All</option>
             <option value="National">National</option>

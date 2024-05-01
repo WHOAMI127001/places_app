@@ -26,7 +26,7 @@ import React from "react"
            <option value="Free">Free</option>
            <option value="Paid">Paid</option>
          </Field>
-         <ErrorMessage name="museumFreeOrPaid" component="div" className="text-red-500" />
+        
           <Field as="select" name="Price" className="p-2 rounded border">
             <option value="">Select Price</option>
             <option value="1">1</option>

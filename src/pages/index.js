@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import Link from "next/link"
 import FilterCuisine from "@/components/FilterCuisine"
+import FilterCuisineAveragePrice from "@/components/filter_cuisine_averageprice"
 import FilterBarType from "@/components/FilterBarType"
 import FilterArtMovement from "@/components/FilterArtMovement"
 import FilterArtType from "@/components/FilterArtType"
@@ -16,10 +17,12 @@ const HomePage = () => {
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "ascending" })
   const [filterType, setFilterType] = useState("")
   const [filterCuisine, setFilterCuisine] = useState("")
+  const [filterCuisineAveragePrice, setFilterCuisineAveragePrice] = useState("")
   const [filterBarType, setFilterBarType] = useState("")  
   const [filterArtType, setFilterArtType] = useState("")
   const [filterArtMovement, setFilterArtMovement] = useState("")
   const [filterParkType, setFilterParcType] = useState("")
+
   
 useEffect(() => {
     const fetchAdresses = async () => {
@@ -33,7 +36,7 @@ useEffect(() => {
 
   useEffect(() => {
     applyFilters()
-  }, [filterType, filterCuisine,  filterArtType, filterArtMovement,filterBarType,filterParkType,adresses,])
+  }, [filterType, filterCuisine, filterCuisineAveragePrice,  filterArtType, filterArtMovement,filterBarType,filterParkType,adresses,])
 
   const sortAdresses = (key) => {
     let direction = "ascending"
@@ -60,30 +63,32 @@ useEffect(() => {
   const applyFilters = () => {
     let filteredData = [...adresses]
   
-    
     if (filterType) {
       filteredData = filteredData.filter(adresse => adresse.type.toLowerCase() === filterType.toLowerCase())
     }
   
-    
     if (filterType === "restaurant" && filterCuisine) {
       filteredData = filteredData.filter(adresse => adresse.cuisineType && adresse.cuisineType.toLowerCase() === filterCuisine.toLowerCase())
     }
+
+    if (filterType === "restaurant" && filterCuisineAveragePrice) {
+      filteredData = filteredData.filter(adresse => adresse.cuisineAveragePrice && adresse.cuisineAveragePrice === filterCuisineAveragePrice)
+    }
   
-    
-    
     if (filterType === "bar" && filterBarType) {
       filteredData = filteredData.filter(adresse => adresse.barType && adresse.barType.toLowerCase() === filterBarType.toLowerCase())
     }
-  
-    
-    if (filterType === "Musée" && filterArtType) {
+
+
+     if (filterType === "Musée" && filterArtType) {
       filteredData = filteredData.filter(adresse => adresse.artType && adresse.artType.toLowerCase() === filterArtType.toLowerCase())
     }
 
     if (filterArtMovement && filterType === "Musée") {
       filteredData = filteredData.filter((adresse) => adresse.artMovement && adresse.artMovement.toLowerCase() === filterArtMovement.toLowerCase())
     }
+
+    
   
     if (filterType === "parc" && filterParkType) {
       filteredData = filteredData.filter(adresse => adresse.parcType && adresse.parcType.toLowerCase() === filterParkType.toLowerCase())
@@ -100,8 +105,7 @@ useEffect(() => {
     }
   }
 
-
-  return (
+return (
     <div className="flex justify-center mt-28">
       <div className="mb-4">
         <label htmlFor="filterType" className="mr-2">Type :</label>
@@ -116,9 +120,9 @@ useEffect(() => {
       {filterType === "restaurant" && <FilterCuisine value={filterCuisine} onChange={(e) => setFilterCuisine(e.target.value)} />}
       {filterType === "bar" && <FilterBarType value={filterBarType} onChange={(e) => setFilterBarType(e.target.value)} />}
       {filterType === "Musée" && <FilterArtType value={filterArtType} onChange={(e) => setFilterArtType(e.target.value)} />}
-      {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />}
+      {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />} 
       {filterType === "parc" && <FilterParkType value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)} />}
-      
+      {filterType === "restaurant" && <FilterCuisineAveragePrice value={filterCuisineAveragePrice} onChange={(e) => setFilterCuisineAveragePrice(e.target.value)} />}
     <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
@@ -146,4 +150,5 @@ useEffect(() => {
     </div>
     )
 }
+
 export default HomePage
