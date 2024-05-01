@@ -21,9 +21,8 @@ const HomePage = () => {
   const [filterArtType, setFilterArtType] = useState("")
   const [filterArtMovement, setFilterArtMovement] = useState("")
   const [filterParkType, setFilterParcType] = useState("")
-
-
-  useEffect(() => {
+  
+useEffect(() => {
     const fetchAdresses = async () => {
        const { data } = await axios.get("http://localhost:3000/api/addresses")
         setAdresses(data)
@@ -119,6 +118,7 @@ return (
       {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />} 
       {filterType === "parc" && <FilterParkType value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)} />}
       {filterType === "restaurant" && <FilterCuisineAveragePrice value={filterCuisineAveragePrice} onChange={(e) => setFilterCuisineAveragePrice(e.target.value)} />}
+      
       <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
@@ -146,6 +146,5 @@ return (
     </div>
     )
   }
-
 
 export default HomePage
