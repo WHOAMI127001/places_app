@@ -10,7 +10,6 @@ import FilterArtMovement from "@/components/FilterArtMovement"
 import FilterArtType from "@/components/FilterArtType"
 import FilterParkType from "@/components/FilterParkType"
 
-
 const HomePage = () => {
   const [adresses, setAdresses] = useState([])
   const [filteredAdresses, setFilteredAdresses] = useState([])
@@ -23,8 +22,8 @@ const HomePage = () => {
   const [filterArtMovement, setFilterArtMovement] = useState("")
   const [filterParkType, setFilterParcType] = useState("")
 
-  
-useEffect(() => {
+
+  useEffect(() => {
     const fetchAdresses = async () => {
        const { data } = await axios.get("http://localhost:3000/api/addresses")
         setAdresses(data)
@@ -79,8 +78,7 @@ useEffect(() => {
       filteredData = filteredData.filter(adresse => adresse.barType && adresse.barType.toLowerCase() === filterBarType.toLowerCase())
     }
 
-
-     if (filterType === "Musée" && filterArtType) {
+   if (filterType === "Musée" && filterArtType) {
       filteredData = filteredData.filter(adresse => adresse.artType && adresse.artType.toLowerCase() === filterArtType.toLowerCase())
     }
 
@@ -88,8 +86,6 @@ useEffect(() => {
       filteredData = filteredData.filter((adresse) => adresse.artMovement && adresse.artMovement.toLowerCase() === filterArtMovement.toLowerCase())
     }
 
-    
-  
     if (filterType === "parc" && filterParkType) {
       filteredData = filteredData.filter(adresse => adresse.parcType && adresse.parcType.toLowerCase() === filterParkType.toLowerCase())
     }
@@ -123,7 +119,7 @@ return (
       {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />} 
       {filterType === "parc" && <FilterParkType value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)} />}
       {filterType === "restaurant" && <FilterCuisineAveragePrice value={filterCuisineAveragePrice} onChange={(e) => setFilterCuisineAveragePrice(e.target.value)} />}
-    <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
+      <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
             <th onClick={() => sortAdresses("street")}>Rue</th>
@@ -149,6 +145,7 @@ return (
       </table>
     </div>
     )
-}
+  }
+
 
 export default HomePage
