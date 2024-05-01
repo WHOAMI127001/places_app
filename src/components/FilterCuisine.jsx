@@ -6,10 +6,8 @@ const FilterCuisine = ({ value, onChange }) => (
             <option value="">Toutes</option>
             <option value="Italian">Italian</option>
             <option value="French">French</option>
-            <option value="Chinese">Chinese</option>
             <option value="Indian">Indian</option>
             <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
             <option value="Vegetarian">Vegetarian</option>
             <option value="Other">Other</option>
             </select>

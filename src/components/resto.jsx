@@ -23,9 +23,11 @@ import React from "react"
     <ErrorMessage name="cuisineAveragePrice" component="div" className="text-red-500" />
     <Field as="select" name="cuisineAveragePrice" className="p-2 rounded border">
       <option value="">Select Average Price</option>
-      <option value="€">€</option>
-      <option value="€€">€€</option>
-      <option value="€€€">€€€</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
     </Field>
     </>
  )

@@ -9,6 +9,7 @@ import FilterArtMovement from "@/components/FilterArtMovement"
 import FilterArtType from "@/components/FilterArtType"
 import FilterParkType from "@/components/FilterParkType"
 
+
 const HomePage = () => {
   const [adresses, setAdresses] = useState([])
   const [filteredAdresses, setFilteredAdresses] = useState([])
@@ -32,7 +33,7 @@ useEffect(() => {
 
   useEffect(() => {
     applyFilters()
-  }, [filterType, filterCuisine, filterArtType, filterArtMovement,filterBarType,filterParkType,adresses,])
+  }, [filterType, filterCuisine,  filterArtType, filterArtMovement,filterBarType,filterParkType,adresses,])
 
   const sortAdresses = (key) => {
     let direction = "ascending"
@@ -69,6 +70,7 @@ useEffect(() => {
       filteredData = filteredData.filter(adresse => adresse.cuisineType && adresse.cuisineType.toLowerCase() === filterCuisine.toLowerCase())
     }
   
+    
     
     if (filterType === "bar" && filterBarType) {
       filteredData = filteredData.filter(adresse => adresse.barType && adresse.barType.toLowerCase() === filterBarType.toLowerCase())
@@ -117,7 +119,7 @@ useEffect(() => {
       {filterType === "Musée" && <FilterArtMovement value={filterArtMovement} onChange={(e) => setFilterArtMovement(e.target.value)} />}
       {filterType === "parc" && <FilterParkType value={filterParkType} onChange={(e) => setFilterParcType(e.target.value)} />}
       
-      <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
+    <table className="w-3/4 text-left shadow-lg bg-white dark:bg-gray-800 dark:text-white text-xs sm:text-base">
         <thead className="bg-blue-500 text-white">
           <tr>
             <th onClick={() => sortAdresses("street")}>Rue</th>

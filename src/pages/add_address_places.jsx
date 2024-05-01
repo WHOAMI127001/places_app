@@ -65,7 +65,7 @@ const renderDynamicFields = (type) => {
       case "Restaurant":
         return <Resto/>
     
-         case "Musée":
+        case "Musée":
         return  <Museum/>
 
    case "Bar":
