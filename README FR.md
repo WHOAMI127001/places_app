@@ -40,14 +40,48 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-## Add Env.Local to launch our application ##
+##  Ajouter  Env.Local  pour lancer l'app ##
 add this path on compass mongodb
-= mongodb://127.0.0.1:27017/Places_map
+= mongodb://127.0.0.1:27017/nom_de_la_db
+exemple: mongodb://127.0.0.1:27017/Places_map
 
-## To use our App please download the following Packages ##
+## Pour utiliser l'application web veuillez installer les packages suivants pour utiliser l'application ##
 Axios
 Fontawesome 
 Yup
+Formik
 Next Router
+
+# Pourqoui  nous avons utiliser ces packages pour la web app ?
+Axios:  Pour relier les requetes des api à la base de donnée 
+Fontawesome:  Pour avoir une grande variété de logo et d'iconne pour les boutons 
+Yup: Validation des  entrés du formulaire
+Formik: Utilisé pour le formulaire d'ajout et de modification de lieu 
+Next Router: Pour redirection des pages 
+
+
+Page Index:
+
+Page Ajout de lieu:
+
+
+
+
+
+Page d'edit de lieu:
+
+
+
+Page de detail des lieus:
+
+
+
+Filtres de recheches:
+
+
+
+
+Script pour  générer des lieux correspondant au schéma de la base de donnée MongoDB
+
 
 
