@@ -50,6 +50,11 @@ Fontawesome
 Yup
 Next Router
 
+# To install the dependecies   #
+Use npm i to install the dependecies in the terminal 
+
+
+
 
 HomePage Component
 
