@@ -8,6 +8,7 @@ import Resto from "@/components/resto"
 import Bar from "@/components/Bar"
 import Park from "@/components/park"
 import Museum from "@/components/museum"
+
 const placeTypes = {
   Restaurant: "Restaurant",
   Musée: "Musée",
@@ -34,7 +35,7 @@ const addAddressPlaces = (props) => {
   const [activeType, setActiveType] = useState(null)
   const [addresses, setAddresses] = useState(initialAddresses)
   const router = useRouter()
-const submit = async ({
+  const submit = async ({
   name,
   street,
   city,
@@ -42,6 +43,7 @@ const submit = async ({
   postalCode,
   
     ...otherProps
+   
 }, { resetForm,}) => {
     const { data: newAddress } = 
     await axios.post("http://localhost:3000/api/addresses",{
@@ -84,6 +86,7 @@ default:
       <div className="bg-white shadow rounded-lg">
         <nav className="flex justify-between p-4 border-b">
           <h1 className="text-xl font-semibold">Add Place</h1>
+          
         </nav>
         <div className="p-8">
           <h1 className="text-xl font-semibold mb-4">Add Places</h1>
