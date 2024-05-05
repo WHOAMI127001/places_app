@@ -9,6 +9,7 @@ import Bar from "@/components/Bar"
 import Park from "@/components/park"
 import Museum from "@/components/museum"
 
+
 const placeTypes = {
   Restaurant: "Restaurant",
   Musée: "Musée",
@@ -59,6 +60,7 @@ const addAddressPlaces = (props) => {
       })
     setAddresses([newAddress, ...addresses])
     resetForm()
+    
     router.push("/")
 }
 // eslint-disable-next-line max-lines-per-function

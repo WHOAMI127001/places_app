@@ -14,6 +14,9 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+# Lien de mon Trelo concernant l'organisation du projet #
+https://trello.com/invite/b/sUgFowuB/ATTI70abfc6efe47bd419a795f74da477e8d6E62648F/projet-places
+
 
 
 ##  Ajouter  Env.Local  pour lancer l'app ##
